@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  resources :order_items
-  resources :categories
-  resources :reviews
-  resources :orders
-  resources :products
-  resources :merchants
+  root "welcome#index"
+
+  resources :categories, only: [:index, :show] do
+    resources :products, only: [:index, :show] do
+      resources :reviews, only: [:new, :create]
+    end
+  end
+
+  resources :orders, except: [:index]
+
+  resources :merchants do
+    resources :products, except: [:delete]
+    resources :categories, except: [:edit, :update, :delete]
+    resources :orders, only: [:index, :show]
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
