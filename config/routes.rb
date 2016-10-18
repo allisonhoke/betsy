@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :order_items
+  resources :categories
+  resources :reviews
+  resources :orders
+  resources :products
+  resources :merchants
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
