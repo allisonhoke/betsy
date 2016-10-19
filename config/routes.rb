@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders, except: [:index]
+  resources :products, only: [:index]
 
   resources :merchants, only: [:show] do
     resources :products, except: [:delete]
