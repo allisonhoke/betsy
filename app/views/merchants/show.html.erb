@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @merchant.username %></h1>
 
-<%= link_to 'Edit', edit_merchant_path(@merchant) %> |
-<%= link_to 'Back', merchants_path %>
+<h2>My Products</h2>
+
+<% @products.each do |product| %>
+  <p><%= product.name %></p>
+  <p>Description: <%= product.description %></p>
+  <p>Stock: <%= product.stock %></p>
+<% end %>
+
+<%= button_to("New Category", new_merchant_category_path(@merchant.id), method: :get ) %>
+
+<%= button_to("New Product",   new_merchant_product_path(@merchant.id), method: :get ) %>
