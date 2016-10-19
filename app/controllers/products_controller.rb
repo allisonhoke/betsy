@@ -7,38 +7,39 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  # GET /products/1
-  # GET /products/1.json
+  def index_by_merchant
+    merchant = Integer(params[:id])
+    @merchant_products = Product.where(merchant_id: merchant)
+  end
+
   def show
+    @product
   end
 
   # GET /products/new
   def new
-    @product = Product.new
+    merchant = Merchant.find(params[:id]).id
+    @product = Product.new(merchant_id: merchant)
   end
 
-  # GET /products/1/edit
-  def edit
-  end
-
-  # POST /products
-  # POST /products.json
   def create
-    @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
+    merchant = Integer(params[:id])
+    @product = Product.new(merchant_id: merchant)
+    if @product.save
+      respond_to do |format|
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
+    else
+      format.html { render :new }
+      format.json { render json: @product.errors, status: :unprocessable_entity }
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
+  def edit
+    @product
+  end
+
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -69,6 +70,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.fetch(:product, {})
+      params.require(:product).permit(:name, :price, :description, :photo_url, :stock)
     end
 end
