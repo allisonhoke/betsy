@@ -1,11 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+item_one:
+  quantity: 1
+  product_id: 1
+  order_id: 1
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+item_two:
+  quantity: 2
+  product_id: 1
+  order_id: 1
+
+
+item_three:
+  quantity: 3
+  product_id: 2
+  order_id: 2
