@@ -1,13 +1,13 @@
 item_one:
   quantity: 1
   product_id: 1
-  order_id: 1
+  order_id: orders(:order_one).id
 
 
 item_two:
   quantity: 2
   product_id: 1
-  order_id: 1
+  order_id: orders(:order_one).id
 
 
 item_three:
