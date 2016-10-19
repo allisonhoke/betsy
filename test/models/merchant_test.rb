@@ -38,6 +38,13 @@ class MerchantTest < ActiveSupport::TestCase
   test "Cannot create two merchants with the same email addresses" do
     Merchant.create!(username: "Wee Toys", email: "store@gmail.com")
     merchant2 = Merchant.new(username: "Tiny Toys", email: "store@gmail.com")
-    assert_not(merchant2.valid?)
+    assert_not merchant2.valid?
+  end
+
+  test "Can display all associated Products" do
+    merchant = merchants(:teeny_merchant)
+    products = Product.where(:merchant_id == merchant.id)
+    assert products.count == 6
+    assert products.nil? == false
   end
 end
