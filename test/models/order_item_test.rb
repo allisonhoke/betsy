@@ -28,18 +28,4 @@ class OrderItemTest < ActiveSupport::TestCase
     assert_not another_item.valid?
     assert another_item.errors.keys.include?(:quantity), "quantity is not in the errors hash"
   end
-
-  test "Cannot create an order_item without an associated product_id" do
-    item = OrderItem.new(quantity: 1, order_id: 1)
-
-    assert_not item.save
-    assert_not item.valid?
-  end
-
-  test "Cannot create an order_item without an associated order_id" do
-    item = OrderItem.new(quantity: 1, product_id: 1)
-
-    assert_not item.save
-    assert_not item.valid?
-  end
 end
