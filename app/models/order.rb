@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
   validate :has_order_items?
 
   def has_order_items?
-    OrderItem.items_in_order(self.id).length != 0
+    a = OrderItem.items_in_order(self.id)
+    result = a.length != 0
+    return result
   end
 end
