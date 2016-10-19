@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+  def setup
+    @order = orders(:order_one)
+  end
+
   test "Create an Order with all data" do
     order = orders(:order_one)
 
@@ -18,4 +22,8 @@ class OrderTest < ActiveSupport::TestCase
   #   assert_equal order.has_order_items?, true
   #   assert_equal another_order.has_order_items, true
   # end
+
+  test "items_in_order returns the items in the order" do
+    assert_equal @order.items_in_order.count, 2, "Didn't return the correct number of items in this order"
+  end
 end
