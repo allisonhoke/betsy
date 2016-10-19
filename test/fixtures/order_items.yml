@@ -13,4 +13,4 @@ item_two:
 item_three:
   quantity: 3
   product_id: 2
-  order_id: 2
+  order_id: orders(:order_two).id
