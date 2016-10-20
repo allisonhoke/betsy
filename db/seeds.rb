@@ -53,8 +53,9 @@ categories = [
   {name: "Animals", description: "Not for consumption."},
   {name: "Cars", description: "For going tiny distances!"},
   {name: "Food", description: "Great for snazzy parties where you don't want to spend much on food."},
-  {name: "Furniture", description: "For dollhouses and/or fairies."},
+  {name: "Furniture", description: "For dollhouses and/or fairies."}
 ]
+
 merchants.each do |merchant|
   Merchant.create(merchant)
 end
@@ -69,4 +70,23 @@ end
 
 categories.each do |category|
   Category.create(category)
+end
+
+Category.all.each do |category|
+  if category.id == 1
+    Product.find(1).categories << category
+    Product.find(6).categories << category
+    Product.find(14).categories << category
+  elsif category.id == 2
+    Product.find(7).categories << category
+    Product.find(8).categories << category
+  elsif category.id == 3
+    Product.find(13).categories << category
+    Product.find(12).categories << category
+    Product.find(11).categories << category
+  else category.id == 4
+    Product.find(2).categories << category
+    Product.find(3).categories << category
+    Product.find(4).categories << category
+  end
 end
