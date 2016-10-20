@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class OrderItemTest < ActiveSupport::TestCase
+  def setup
+    @product = Product.create(name: "cat", price: 1234, stock: 14)
+    @item = OrderItem.create(quantity: 1, product_id: @product.id, order_id: 1)
+  end
+
   test "Create an OrderItem with all valid data" do
     item = order_items(:item_one)
 
@@ -27,5 +32,9 @@ class OrderItemTest < ActiveSupport::TestCase
     assert_not another_item.save
     assert_not another_item.valid?
     assert another_item.errors.keys.include?(:quantity), "quantity is not in the errors hash"
+  end
+
+  test "#find product returns the correct product" do
+    assert_equal @item.find_product.name, "cat", "Did not return the correct product"
   end
 end

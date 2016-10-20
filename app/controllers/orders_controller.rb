@@ -9,7 +9,10 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   # GET /orders/1.json
-  def show
+  def show #confirmation screen for order details after purchasing
+    @order = Order.find(params[:id])
+    @items = @order.order_items
+    @total = @order.total
   end
 
   # GET /orders/new
