@@ -1,6 +1,7 @@
 correct_review:
   rating_description: Blah blah blah blah.
   rating: 4
+  product_id: products(:cat).id
 
 no_description_review:
   rating_description: This'll all get set to nil before test.
