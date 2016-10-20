@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 merchants = [
   {username: "TinyTim", email: "tiny@tim.com"},
   {username: "MiniMouse", email: "mini@disney.com"},
@@ -48,12 +41,26 @@ reviews = [
   {rating_description: "Worst. Birthday. Ever.", rating: 2, product_id: 10}
 ]
 
-
 categories = [
   {name: "Animals", description: "Not for consumption."},
   {name: "Cars", description: "For going tiny distances!"},
   {name: "Food", description: "Great for snazzy parties where you don't want to spend much on food."},
   {name: "Furniture", description: "For dollhouses and/or fairies."}
+]
+
+orders = [
+  {name: "Peg Peggerson", email: "peg@email.com"},
+  {name: "Esther Smith", email: "esther@email.com"},
+  {name: "Polly Wog", email: "polly@email.com"},
+]
+
+order_items = [
+  {quantity: 1, product_id: 3, order_id: 1},
+  {quantity: 1, product_id: 2, order_id: 1},
+  {quantity: 1, product_id: 10, order_id: 2},
+  {quantity: 1, product_id: 14, order_id: 3},
+  {quantity: 1, product_id: 8, order_id: 3},
+  {quantity: 2, product_id: 5, order_id: 4}
 ]
 
 merchants.each do |merchant|
@@ -70,6 +77,14 @@ end
 
 categories.each do |category|
   Category.create(category)
+end
+
+orders.each do |order|
+  Order.create(order)
+end
+
+order_items.each do |oi|
+  OrderItem.create(oi)
 end
 
 Category.all.each do |category|
