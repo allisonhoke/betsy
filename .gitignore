@@ -17,5 +17,7 @@
 /tmp
 /coverage
 
-#Fucking DS Store
+.env
+
+#DS Store
 .DS_Store
