@@ -1,31 +1,16 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  # GET /orders
-  # GET /orders.json
-  def index
-    @orders = Order.all
-  end
-
-  # GET /orders/1
-  # GET /orders/1.json
   def show #confirmation screen for order details after purchasing
     @order = Order.find(params[:id])
     @items = @order.order_items
     @total = @order.total
   end
 
-  # GET /orders/new
   def new
-    @order = Order.new
+
   end
 
-  # GET /orders/1/edit
-  def edit
-  end
-
-  # POST /orders
-  # POST /orders.json
   def create
     @order = Order.new(order_params)
 
@@ -39,6 +24,10 @@ class OrdersController < ApplicationController
       end
     end
   end
+  
+  def edit
+  end
+
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
