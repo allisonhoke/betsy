@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Betsy</title>
+  <title>Weebay</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <header>
+    <nav>
+      <section class ="row">
+        <span class="small-12 medium-12 large-12 columns">
+          <li><%= link_to("Shop All", "???") %></li>
+      <% Category.all.each do |category| %>
+        <li><%= link_to(category.name, category_products_path(category.id)) %></li>
+      <% end %>
+      <ul id="menu">
+        <li><a href="#">Merchants</a>
+          <ul>
+        <% Merchant.all.each do |merchant| %>
+          <li><%= link_to(merchant.username, merchant_products_path(merchant.id)) %></li>
+        <% end %>
+      </ul>
+    </li>
+  </span>
+</section>
+    </nav>
+  </header>
 <%= yield %>
-
 </body>
 </html>
