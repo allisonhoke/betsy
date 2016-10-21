@@ -1,14 +1,14 @@
 merchants = [
-  {username: "TinyTim", email: "tiny@tim.com", uid: 1, provider: "github"},
-  {username: "MiniMouse", email: "mini@disney.com", uid: 2, provider: "github" },
-  {username: "LittleEngine", email: "littleengine@could.net", uid: 3, provider: "github"},
-  {username: "SmallySmalls", email: "smally@rap.com", uid: 4, provider: "github"},
-  {username: "LilRuffRuff", email: "lilrr@rap.com", uid: 5, provider: "github"},
-  {username: "Stuart", email: "stuart.little@aol.com", uid: 6, provider: "github"},
-  {username: "PSmurf", email: "papa@smurf.com", uid: 7, provider: "github"},
-  {username: "Thumbelina", email: "thumbs@gmail.com", uid: 8, provider: "github"},
-  {username: "JCricks", email: "jiminy@gapettos.com", uid: 9, provider: "github"},
-  {username: "Dobby", email: "dobby@hogwarts.com", uid: 10, provider: "github"}
+  {username: "TinyTim", email: "tiny@tim.com"},
+  {username: "MiniMouse", email: "mini@disney.com"},
+  {username: "LittleEngine", email: "littleengine@could.net"},
+  {username: "SmallySmalls", email: "smally@rap.com"},
+  {username: "LilRuffRuff", email: "lilrr@rap.com"},
+  {username: "Stuart", email: "stuart.little@aol.com"},
+  {username: "PSmurf", email: "papa@smurf.com"},
+  {username: "Thumbelina", email: "thumbs@gmail.com"},
+  {username: "JCricks", email: "jiminy@gapettos.com"},
+  {username: "Dobby", email: "dobby@hogwarts.com"}
 ]
 
 products = [
@@ -48,19 +48,19 @@ categories = [
   {name: "Furniture", description: "For dollhouses and/or fairies."}
 ]
 
-orders = [
-  {name: "Peg Peggerson", email: "peg@email.com"},
-  {name: "Esther Smith", email: "esther@email.com"},
-  {name: "Polly Wog", email: "polly@email.com"},
-]
-
-order_items = [
+items = [
   {quantity: 1, product_id: 3, order_id: 1},
   {quantity: 1, product_id: 2, order_id: 1},
   {quantity: 1, product_id: 10, order_id: 2},
   {quantity: 1, product_id: 14, order_id: 3},
   {quantity: 1, product_id: 8, order_id: 3},
   {quantity: 2, product_id: 5, order_id: 4}
+]
+
+orders = [
+  {name: "Peg Peggerson", email: "peg@email.com"},
+  {name: "Esther Smith", email: "esther@email.com"},
+  {name: "Polly Wog", email: "polly@email.com"}
 ]
 
 merchants.each do |merchant|
@@ -79,12 +79,23 @@ categories.each do |category|
   Category.create(category)
 end
 
-orders.each do |order|
-  Order.create(order)
-end
-
-order_items.each do |oi|
-  OrderItem.create(oi)
+orders.each do |indiv_order|
+  if indiv_order[:name] == "Peg Peggerson"
+    a = Order.new(indiv_order)
+    a.order_items << OrderItem.create(items[0])
+    a.order_items << OrderItem.create(items[1])
+    a.save
+  elsif indiv_order[:name] == "Esther Smith"
+    b = Order.new(indiv_order)
+    b.order_items << OrderItem.create(items[2])
+    b.order_items << OrderItem.create(items[3])
+    b.save
+  elsif indiv_order[:name] == "Polly Wog"
+    c = Order.new(indiv_order)
+    c.order_items << OrderItem.create(items[4])
+    c.order_items << OrderItem.create(items[5])
+    c.save
+  end
 end
 
 Category.all.each do |category|
