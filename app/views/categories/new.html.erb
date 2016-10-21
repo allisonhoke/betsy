@@ -1,5 +1,5 @@
-<h1>New Category</h1>
+<h1>Add a New Category</h1>
 
-<%= render 'form' %>
+<%= render "form", path_name: new_category_path, http_method: :post %>
 
-<%= link_to 'Back', categories_path %>
+<%= link_to "Back to all categories", categories_path %>

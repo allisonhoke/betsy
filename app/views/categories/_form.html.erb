@@ -10,8 +10,16 @@
       </ul>
     </div>
   <% end %>
+<% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_for @category, :action=> path_name, :method => http_method do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, :size => 150%>
+  <br>
+
+  <%= f.submit "Submit" %>
 <% end %>

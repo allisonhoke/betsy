@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  resources :categories, only: [:index, :show] do
-    resources :products, only: [:index, :show] do
-      resources :reviews, only: [:new, :create]
-    end
+  resources :categories, only: [:index, :show, :new, :create] do
+    resources :products, only: [:index, :show]
   end
 
   resources :orders, except: [:index]
