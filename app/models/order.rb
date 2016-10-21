@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   has_many :order_items
   has_many :products, through: :order_items
   validate :must_have_order_items
+  validates :email, format: {with: /@/}
 
   def must_have_order_items
     if items_in_order.length <= 0
