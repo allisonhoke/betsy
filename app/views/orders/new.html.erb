@@ -1,5 +1,10 @@
 <h1>New Order</h1>
+<%= form_for @order do |f| %>
+      <p><%= f.label :name, "Name:" %>
+      <%= f.text_field :name %></p>
 
-<%= render 'form' %>
+      <p><%= f.label :email, "Email:" %>
+      <%= f.text_field :email %></p>
 
-<%= link_to 'Back', orders_path %>
+      <p><%= f.submit "Save" %></p>
+    <% end %>
