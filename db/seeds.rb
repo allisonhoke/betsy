@@ -1,14 +1,14 @@
 merchants = [
-  {username: "TinyTim", email: "tiny@tim.com"},
-  {username: "MiniMouse", email: "mini@disney.com"},
-  {username: "LittleEngine", email: "littleengine@could.net"},
-  {username: "SmallySmalls", email: "smally@rap.com"},
-  {username: "LilRuffRuff", email: "lilrr@rap.com"},
-  {username: "Stuart", email: "stuart.little@aol.com"},
-  {username: "PSmurf", email: "papa@smurf.com"},
-  {username: "Thumbelina", email: "thumbs@gmail.com"},
-  {username: "JCricks", email: "jiminy@gapettos.com"},
-  {username: "Dobby", email: "dobby@hogwarts.com"}
+  {username: "TinyTim", email: "tiny@tim.com", uid: 1, provider: "github"},
+  {username: "MiniMouse", email: "mini@disney.com", uid: 2, provider: "github" },
+  {username: "LittleEngine", email: "littleengine@could.net", uid: 3, provider: "github"},
+  {username: "SmallySmalls", email: "smally@rap.com", uid: 4, provider: "github"},
+  {username: "LilRuffRuff", email: "lilrr@rap.com", uid: 5, provider: "github"},
+  {username: "Stuart", email: "stuart.little@aol.com", uid: 6, provider: "github"},
+  {username: "PSmurf", email: "papa@smurf.com", uid: 7, provider: "github"},
+  {username: "Thumbelina", email: "thumbs@gmail.com", uid: 8, provider: "github"},
+  {username: "JCricks", email: "jiminy@gapettos.com", uid: 9, provider: "github"},
+  {username: "Dobby", email: "dobby@hogwarts.com", uid: 10, provider: "github"}
 ]
 
 products = [

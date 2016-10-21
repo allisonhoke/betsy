@@ -23,7 +23,15 @@
         <% end %>
       </ul>
     </li>
+  </ul>
   </span>
+  <span class="small-12 medium-12 large-12 columns">
+  <% if session[:merchant_id].nil? %>
+    <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
+  <% else %>
+    <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
+  <% end %>
+</span>
 </section>
     </nav>
   </header>

@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
+  get "/auth/:provider/callback" =>  "sessions#create"
+  get "/sessions/additional_info", to: "sessions#new", as: "new_session"
+  patch "/sessions/additional_info", to: "sessions#update", as: "additional_info"
+  get "/sessions/login_failure", to: "sessions#login_failure", as: "login_failure"
+  get "sessions" => "sessions#index"
+  delete "sessions", to: "sessions#destroy"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
