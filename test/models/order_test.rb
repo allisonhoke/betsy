@@ -22,4 +22,11 @@ class OrderTest < ActiveSupport::TestCase
   test "#total returns the correct total of an order" do
     assert_equal @order.total, 2234, "Didn't return the correct total"
   end
+
+  test "doesn't create an order with an invalid email address" do
+    invalid_order = Order.new(name: "Allison", email: "AllisonHoke")
+
+    assert_not invalid_order.save
+    assert_not invalid_order.valid?
+  end
 end
