@@ -1,7 +1,7 @@
 <h1>Weebay: It's The Little Things</h1>
 
 <% if !@popular.empty? %>
-  <h2>People Love These!!!</h2>
+  <h2>Top Rated Products</h2>
   <% @popular.each do |item| %>
     <p><%= Product.find(item.product_id).name %></p>
     <p><%= Product.find(item.product_id).description %></p>
