@@ -69,3 +69,8 @@ header li {
     background-color: lightgray;
     border-radius: 5%;
 }
+
+
+img {
+  height: 200px;
+}
