@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 /coverage
+
+#Fucking DS Store
+.DS_Store

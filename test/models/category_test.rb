@@ -20,4 +20,7 @@ class CategoryTest < ActiveSupport::TestCase
     assert_not v.valid?
   end
 
+  test "Category must have an associated product" do
+    assert_not_nil @category.products
+  end
 end

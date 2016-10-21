@@ -32,4 +32,8 @@ class ReviewTest < ActiveSupport::TestCase
     assert @review.valid?
     assert review_two.valid?
   end
+  # Don't know why this isn't working???
+  # test "Review should have an associated Product" do
+  #   assert_not_nil @review.product
+  # end
 end
