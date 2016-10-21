@@ -1,31 +1,44 @@
 merchants = [
-  {username: "TinyTim", email: "tiny@tim.com", uid: 1, provider: "github"},
-  {username: "MiniMouse", email: "mini@disney.com", uid: 2, provider: "github" },
-  {username: "LittleEngine", email: "littleengine@could.net", uid: 3, provider: "github"},
-  {username: "SmallySmalls", email: "smally@rap.com", uid: 4, provider: "github"},
-  {username: "LilRuffRuff", email: "lilrr@rap.com", uid: 5, provider: "github"},
-  {username: "Stuart", email: "stuart.little@aol.com", uid: 6, provider: "github"},
-  {username: "PSmurf", email: "papa@smurf.com", uid: 7, provider: "github"},
-  {username: "Thumbelina", email: "thumbs@gmail.com", uid: 8, provider: "github"},
-  {username: "JCricks", email: "jiminy@gapettos.com", uid: 9, provider: "github"},
-  {username: "Dobby", email: "dobby@hogwarts.com", uid: 10, provider: "github"}
+  {username: "TinyTim", email: "tiny@tim.com"},
+  {username: "MiniMouse", email: "mini@disney.com"},
+  {username: "LittleEngine", email: "littleengine@could.net"},
+  {username: "SmallySmalls", email: "smally@rap.com"},
+  {username: "LilRuffRuff", email: "lilrr@rap.com"},
+  {username: "Stuart", email: "stuart.little@aol.com"},
+  {username: "PSmurf", email: "papa@smurf.com"},
+  {username: "Thumbelina", email: "thumbs@gmail.com"},
+  {username: "JCricks", email: "jiminy@gapettos.com"},
+  {username: "Dobby", email: "dobby@hogwarts.com"}
 ]
 
 products = [
-  {name: "Mini Horse", price: 250000, description: "A small, fucking adorable horse omg I don't even know wtf to do with myself!!!11", photo_url: "http://www.tophorse.com.au/images/ResizedImages/17-12-14-873572Image1_w577h600.jpg", stock: 1, merchant_id: 1},
-  {name: "Tiny Couch", price: 2000, description: "Great for tiny dinner parties", photo_url:"http://designinspiration.com/images/2016/02/tiny-couch.jpg", stock: 12, merchant_id: 2},
-  {name: "Fully loaded small table!", price: 3200, description: "Attracts tiny ants!", photo_url: "http://www.seriouseats.com/images/20081028-tinytable.jpg", stock: 4, merchant_id: 2},
-  {name: "Tiny bed with even tinier sidetable", price: 1500, description: "LOOKIT THE TINY PILLOW OH MY GAW", photo_url: "http://www.funpalstudio.com/wp-content/uploads/2016/04/i-quit-my-job-as-a-lawyer-to-make-tiny-furniture-2__605.jpg", stock:2 , merchant_id: 3},
-  {name: "Fetus Grand Piano", price: 100000, description: "Normal-sized Hugh Laurie not included. Plays sharp.", photo_url: "http://i.imgur.com/CAWs6XG.png", stock: 1, merchant_id: 4},
-  {name: "TINY BUNNIEIIEIEIEIIE", price: 80000, description: "OEIURSDLKFJSDLKFJ WHY IS IT SO WEE??? EEEEEeeeeeEEEEE!!!!! (Not for human consumption)", photo_url: "http://i.enkivillage.com/FEgCns-EmyFbpSi8oqw5ZanRFI0=/800x0//images/2015/06/1af066b6507b86744a815fa75c37a816.jpg", stock: 1, merchant_id: 5},
-  {name: "Jeep-lette", price: 150000, description: "This is a small Jeep. I definitely do not own a 250 lb pug.", photo_url: "https://s-media-cache-ak0.pinimg.com/236x/88/c7/28/88c7281c5f7e1b149eca9490898f4e57.jpg", stock: 1, merchant_id: 6},
-  {name: "MiniCooper", price: 3000000, description: "Remember that movie with the Mini Coopers and the zoom zoom? Buy this to be that.", photo_url: "http://media.caranddriver.com/images/02q3/267342/mini-cooper-s-photo-6297-s-429x262.jpg", stock: 2, merchant_id: 7},
-  {name: "Action Figure Abode", price: 15000, description: "DONE KICKIN' ASS TO SAVE THE WORLD? KICK OF YOUR COMBAT BOOKS IN THIS KICKIN' PAD!", photo_url: "http://shop.greenleafdollhouses.com/images/temp/8010-Garfield-dollhouse-PF-400.gif", stock: 600, merchant_id: 8},
-  {name: "Bridge", price: 60, description: "DO NOT ATTEMPT TO CROSS. Do not breathe directly on it. In fact, don't look at it directly.", photo_url: "http://farm1.static.flickr.com/38/107108594_2a80f92829_z.jpg", stock: 4, merchant_id: 8},
-  {name: "Miniature KFC Value Meal", price: 500, description: "Just a little hungry?", photo_url: "https://i.ytimg.com/vi/XVC2RaIt05s/maxresdefault.jpg", stock: 34, merchant_id: 9},
-  {name: "Miniature McDonalds Value Meal", price: 550, description: "Guilt-free diet cheat!", photo_url: "https://i.ytimg.com/vi/XVC2RaIt05s/maxresdefault.jpg", stock: 39, merchant_id: 9},
-  {name: "Miniature Starbucks", price: 300, description: "Only 300 calories!!", photo_url: "https://ae01.alicdn.com/kf/HTB1BS5dJFXXXXaPXFXXq6xXFXXXN/2-PCS-1-12-font-b-Miniature-b-font-Dollhouse-Ice-cream-Drinks-Mini-font-b.jpg", stock: 22, merchant_id: 9},
-  {name: "MicroSquid", price: 1900, description: "Booger or creature?", photo_url: "https://i.ytimg.com/vi/EfMPaCyLVDI/maxresdefault.jpg", stock: 4, merchant_id: 10}
+  {name: "Mini Horse", price: 250000, description: "A small, fucking adorable horse omg I don't even know wtf to do with myself!!!11", photo_url: "/assets/horse.jpg", stock: 1, merchant_id: 1},
+
+  {name: "Tiny Couch", price: 2000, description: "Great for tiny dinner parties", photo_url:"/assets/couch.jpg", stock: 12, merchant_id: 2},
+
+  {name: "Fully loaded small table!", price: 3200, description: "Attracts tiny ants!", photo_url: "/assets/table.jpg", stock: 4, merchant_id: 2},
+
+  {name: "Tiny bed with even tinier sidetable", price: 1500, description: "LOOKIT THE TINY PILLOW OH MY GAW", photo_url: "/assets/bed.jpg", stock:2 , merchant_id: 3},
+
+  {name: "Fetus Grand Piano", price: 100000, description: "Normal-sized Hugh Laurie not included. Plays sharp.", photo_url: "/assets/piano.png", stock: 1, merchant_id: 4},
+
+  {name: "TINY BUNNIEIIEIEIEIIE", price: 80000, description: "OEIURSDLKFJSDLKFJ WHY IS IT SO WEE??? EEEEEeeeeeEEEEE!!!!! (Not for human consumption)", photo_url: "/assets/bunny.jpg", stock: 1, merchant_id: 5},
+
+  {name: "Jeep-lette", price: 150000, description: "This is a small Jeep. I definitely do not own a 250 lb pug.", photo_url: "/assets/jeep.jpg", stock: 1, merchant_id: 6},
+
+  {name: "MiniCooper", price: 3000000, description: "Remember that movie with the Mini Coopers and the zoom zoom? Buy this to be that.", photo_url: "/assets/minicooper.jpg", stock: 2, merchant_id: 7},
+
+  {name: "Action Figure Abode", price: 15000, description: "DONE KICKIN' ASS TO SAVE THE WORLD? KICK OF YOUR COMBAT BOOKS IN THIS KICKIN' PAD!", photo_url: "/assets/house.gif", stock: 600, merchant_id: 8},
+
+  {name: "Bridge", price: 60, description: "DO NOT ATTEMPT TO CROSS. Do not breathe directly on it. In fact, don't look at it directly.", photo_url: "/assets/bridge.jpg", stock: 4, merchant_id: 8},
+
+  {name: "Miniature KFC Value Meal", price: 500, description: "Just a little hungry?", photo_url: "/assets/kfc.jpg", stock: 34, merchant_id: 9},
+
+  {name: "Miniature McDonalds Value Meal", price: 550, description: "Guilt-free diet cheat!", photo_url: "/assets/mcvalue.jpeg", stock: 39, merchant_id: 9},
+
+  {name: "Miniature Starbucks", price: 300, description: "Only 300 calories!!", photo_url: "/assets/starbucks.jpg", stock: 22, merchant_id: 9},
+
+  {name: "MicroSquid", price: 1900, description: "Booger or creature?", photo_url: "/assets/squid.jpg", stock: 4, merchant_id: 10}
 ]
 
 reviews = [
@@ -48,19 +61,19 @@ categories = [
   {name: "Furniture", description: "For dollhouses and/or fairies."}
 ]
 
-orders = [
-  {name: "Peg Peggerson", email: "peg@email.com"},
-  {name: "Esther Smith", email: "esther@email.com"},
-  {name: "Polly Wog", email: "polly@email.com"}
-]
-
-order_items = [
+items = [
   {quantity: 1, product_id: 3, order_id: 1},
   {quantity: 1, product_id: 2, order_id: 1},
   {quantity: 1, product_id: 10, order_id: 2},
   {quantity: 1, product_id: 14, order_id: 3},
   {quantity: 1, product_id: 8, order_id: 3},
   {quantity: 2, product_id: 5, order_id: 4}
+]
+
+orders = [
+  {name: "Peg Peggerson", email: "peg@email.com"},
+  {name: "Esther Smith", email: "esther@email.com"},
+  {name: "Polly Wog", email: "polly@email.com"}
 ]
 
 merchants.each do |merchant|
@@ -79,12 +92,23 @@ categories.each do |category|
   Category.create(category)
 end
 
-orders.each do |order|
-  Order.create(order)
-end
-
-order_items.each do |oi|
-  OrderItem.create(oi)
+orders.each do |indiv_order|
+  if indiv_order[:name] == "Peg Peggerson"
+    a = Order.new(indiv_order)
+    a.order_items << OrderItem.create(items[0])
+    a.order_items << OrderItem.create(items[1])
+    a.save
+  elsif indiv_order[:name] == "Esther Smith"
+    b = Order.new(indiv_order)
+    b.order_items << OrderItem.create(items[2])
+    b.order_items << OrderItem.create(items[3])
+    b.save
+  elsif indiv_order[:name] == "Polly Wog"
+    c = Order.new(indiv_order)
+    c.order_items << OrderItem.create(items[4])
+    c.order_items << OrderItem.create(items[5])
+    c.save
+  end
 end
 
 Category.all.each do |category|
