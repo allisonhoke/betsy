@@ -17,7 +17,7 @@
           <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
           <% else %>
           <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
-          <!-- <li><%# link_to("Account Page", merchant_path(merchant.id) %></li> -->
+          <li><%= link_to("Account Page", merchant_path(session[:merchant_id])) %></li>
           <% end %>
         </span>
         <span class="small-4 medium-4 large-4 columns">
