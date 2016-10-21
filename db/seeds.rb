@@ -51,7 +51,7 @@ categories = [
 orders = [
   {name: "Peg Peggerson", email: "peg@email.com"},
   {name: "Esther Smith", email: "esther@email.com"},
-  {name: "Polly Wog", email: "polly@email.com"},
+  {name: "Polly Wog", email: "polly@email.com"}
 ]
 
 order_items = [
@@ -99,7 +99,7 @@ Category.all.each do |category|
     Product.find(13).categories << category
     Product.find(12).categories << category
     Product.find(11).categories << category
-  else category.id == 4
+  elsif category.id == 4
     Product.find(2).categories << category
     Product.find(3).categories << category
     Product.find(4).categories << category
