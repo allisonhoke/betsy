@@ -11,7 +11,7 @@
     <nav>
       <section class ="row">
         <span class="small-12 medium-12 large-12 columns">
-          <li><%= link_to("Shop All", "???") %></li>
+          <li><%= link_to("Shop All", products_path) %></li>
       <% Category.all.each do |category| %>
         <li><%= link_to(category.name, category_products_path(category.id)) %></li>
       <% end %>
