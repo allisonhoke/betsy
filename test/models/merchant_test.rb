@@ -47,4 +47,12 @@ class MerchantTest < ActiveSupport::TestCase
     assert products.count == 6
     assert products.nil? == false
   end
+
+  test "build_from_github does use github info to build a user" do
+    auth_hash = OmniAuth.config.mock_auth[:github]
+    test_merchant = Merchant.build_from_github(auth_hash)
+
+    assert_equal test_merchant.username, auth_hash['info']['name']
+    assert_equal test_merchant.email, auth_hash['info']['email']
+  end
 end
