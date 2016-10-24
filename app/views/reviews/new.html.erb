@@ -1,6 +1,6 @@
 <h1>New Review</h1>
 <% if @merchant.nil? && !@product.nil?%>
-  <%= form_for @review, url:product_reviews_path(@product), method: :post do |f| %>
+  <%= form_for @review, url:product_reviews_path(@product), method: :post, class: "form" do |f| %>
 
     <%= f.label :rating %>
     <%= f.radio_button(:rating, 1) %>
@@ -20,7 +20,7 @@
     <%= f.submit "Submit" %>
   <% end %>
 <% elsif @merchant && @product %>
-  <%= form_for @review, url:merchant_product_reviews_path(@merchant,@product), method: :post do |f| %>
+  <%= form_for @review, url:merchant_product_reviews_path(@merchant,@product), method: :post, class: "form" do |f| %>
 
     <%= f.label :rating %>
     <%= f.radio_button(:rating, 1) %>

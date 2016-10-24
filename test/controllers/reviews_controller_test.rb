@@ -42,14 +42,21 @@ class ReviewsControllerTest < ActionController::TestCase
   #   assert_template :review_error
   # end
 
-  test "Create should create review" do
+  test "Create should create review for unauth user" do
     assert_difference('Review.count') do
       post :create, review: { rating: 4, rating_description: "bah", product_id: 1 } , product_id: 1
+    end
+  end
+
+  test "Create should create review for an auth user" do
+    assert_difference('Review.count') do
+      post :create, review: { rating: 4, rating_description: "bah", product_id: 1 } , product_id: 1, merchant_id: merchants(:other_merchant).id
     end
   end
 
   test "Show should show review" do
     get :show, id: @review, product_id: @product.id
     assert_response :success
+    assert_template :show
   end
 end
