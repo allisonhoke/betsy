@@ -10,12 +10,16 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    # Once we get @current_user figured out
+    # if @current_user.merchant_id.nil?
+    #   render :category_error
+    # end
     @category = Category.new
   end
 
   def create
-    if @category.create!(category_params)
-      redirect_to category_path(@category)
+    if Category.create!(category_params)
+      redirect_to categories_path
     else
       render :new
     end
