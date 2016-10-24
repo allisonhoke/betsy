@@ -9,6 +9,9 @@ class ProductsController < ApplicationController
     if params[:category_id]
       @products = Category.find(params[:category_id]).products
       render :index
+    elsif params[:merchant_id]
+      @products = Merchant.find(params[:merchant_id]).products
+      render :index
     end
     @products = Product.all
   end
@@ -66,6 +69,7 @@ class ProductsController < ApplicationController
   def add_to_cart(qty)
     #creates order if order isn't nil
     #creates order item for product being added and adds it to order that was just created or in the sessions if it already existed
+    #takes in user input in the product show view for qty that user wants to add to cart
     if OrderItem.create(quantity: @product.add_to_cart(qty), order_id: @order, product_id: @product)
       redirect_to cart_path
     else
