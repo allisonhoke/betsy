@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
     @items.each do |item|
       product = item.find_product
-      product.#PURCHASE 
+      product.product_purchased
     end
 
     render :purchase # REVIEW: does this need to be here since I am clearing the session data after this?
