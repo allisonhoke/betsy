@@ -55,4 +55,12 @@ class MerchantTest < ActiveSupport::TestCase
     assert_equal test_merchant.username, auth_hash['info']['name']
     assert_equal test_merchant.email, auth_hash['info']['email']
   end
+
+  test "find_all_order_items_revenue shows the merchant's total revenue" do
+    merchant = merchants(:teeny_merchant)
+    total_revenue = merchant.find_all_order_items_revenue
+
+    assert_not_nil total_revenue
+    assert_equal 165000, total_revenue
+  end
 end
