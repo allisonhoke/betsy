@@ -3,6 +3,7 @@
 <% @items.each do |item| %>
   <%= "Product: #{ item.find_product.name }" %> <%# add a link here %>
   <%= "Subtotal: #{ item.find_product.price * item.quantity }" %>
+  <%= link_to "Remove this product", order_item_path(item.id), method: :delete %>
   <% end %>
 
   <%= link_to "Purchase this order", orders_edit_path, method: :get %>
