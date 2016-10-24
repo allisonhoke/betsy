@@ -27,8 +27,7 @@ Rails.application.routes.draw do
   end
 
   get "/auth/:provider/callback" =>  "sessions#create"
-  get "/sessions/additional_info", to: "sessions#new", as: "new_session"
-  patch "/sessions/additional_info", to: "sessions#update", as: "additional_info"
+
   get "/sessions/login_failure", to: "sessions#login_failure", as: "login_failure"
   get "sessions" => "sessions#index"
   delete "sessions", to: "sessions#destroy"
