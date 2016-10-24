@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
 
+  # def index
+  #   @user = Merchant.find(session[:merchant_id]) # < recalls the value set in a previous request
+  # end
+
   def create
     auth_hash = request.env['omniauth.auth']
     redirect to login_failure unless auth_hash['uid']
@@ -21,7 +25,4 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def index
-    @user = Merchant.find(session[:merchant_id]) # < recalls the value set in a previous request
-  end
 end
