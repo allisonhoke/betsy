@@ -1,27 +1,23 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :cart, only: [:show, :edit, :update, :purchase]
 
-  def show #confirmation screen for order details after purchasing
-    @order = Order.find(params[:id])
-    @items = @order.order_items
-    @total = @order.total
-  end
+  def show; end #this is the cart
 
-  def new
-    @order = Order.new
-  end
+  def new; end
 
   def create
     @order = Order.new(order_params)
   end
 
   def edit
-    @order = Order.find(params[:id])
+    @order = Order.find(session[:order_id])
   end
 
-
   def update
-    @order = Order.find(params[:id])
+    @order = Order.find(session[:order_id])
+    # @order.email = :email
+    # @order.name = :name
     if @order.update(order_params)
       redirect_to order_path(@order) # REVIEW: where should this redirect to??
     else
@@ -29,18 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def cart
-    begin
-      @cart = Order.find(session[:order_id])
-      rescue ActiveRecord::RecordNotFound
-         @cart = Order.create
-         session[:order_id] = @cart.id
-    end
-    @items = @cart.order_items
-  end
-
-  def purchase
-    #redirect_to :show
+  def purchase #sends you to the confirmation page
+    @order = Order.find(session[:order_id])
+    @items = @order.order_items
+    @total = @cart.total
   end
 
   private
@@ -53,4 +41,5 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:name, :email)
     end
+
 end
