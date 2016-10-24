@@ -4,22 +4,16 @@ class OrdersController < ApplicationController
 
   def show; end #this is the cart
 
-  def new; end
-
-  def create
-    @order = Order.new
-  end
-
   def edit
     set_order
   end
 
   def update
     set_order
-    @order.email = :email
-    @order.name = :name
-    if @order.save # REVIEW: OR order.update(order_params)
-      redirect_to order_path(@order) # REVIEW: where should this redirect to??
+    @cart.email = :email
+    @cart.name = :name
+    if @cart.save # REVIEW: OR order.update(order_params)
+      redirect_to order_path(@cart) # REVIEW: where should this redirect to??
     else
       render :edit
     end
@@ -27,11 +21,11 @@ class OrdersController < ApplicationController
 
   def purchase #sends you to the confirmation page
     set_order
-    @items = @order.order_items
+    @items = @cart.order_items
     @total = @cart.total
 
-    @order.status = "purchased"
-    @order.save
+    @cart.status = "paid"
+    @cart.save
 
     @items.each do |item|
       product = item.find_product
@@ -44,12 +38,10 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(session[:id])
+      @cart = Order.find(session[:order_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:name, :email, :address, :cc_number, :expiration_date, :cvv, :zip_code)
     end
