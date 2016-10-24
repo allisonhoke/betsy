@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   patch "orders/update" => "orders#update"
   get "orders/confirmation" => "orders#purchase", as: "confirmation"
 
+  resources :order_items, only: [:delete]
+
   resources :products, only: [:index, :show] do
     resources :reviews, only: [:index, :show, :new, :create]
   end
