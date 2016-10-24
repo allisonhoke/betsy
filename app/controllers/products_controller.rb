@@ -1,15 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  before_action :cart, only: [:add_to_cart]
+
   # GET /products
   # GET /products.json
   def index
     @products = Product.all
-  end
-
-  def index_by_merchant
-    merchant = Integer(params[:id])
-    @merchant_products = Product.where(merchant_id: merchant)
   end
 
   def show
@@ -59,6 +56,16 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def add_to_cart(qty)
+    #creates order if order isn't nil
+    #creates order item for product being added and adds it to order that was just created or in the sessions if it already existed
+    if OrderItem.create(quantity: @product.add_to_cart(qty), order_id: @order, product_id: @product)
+      redirect_to cart_path
+    else
+      render :cart_update_failure
     end
   end
 

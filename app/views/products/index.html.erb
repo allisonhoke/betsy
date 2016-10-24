@@ -10,15 +10,12 @@
   </thead>
 
   <tbody>
-    <% @products.each do |product| %>
+    <% @products.each do |p| %>
       <tr>
-        <td><%= "#{product.name}" %></td>
-        <td>Price: $<%= "#{(product.price)/100}" %>.00</td>
-        <td><%= image_tag("#{product.photo_url}") %> </td>
+        <td><%= link_to"#{p.name}", product_path(p.id) %></td>
+        <td>Price: $<%= "#{(p.price)/100}" %>.00</td>
+        <td><%= image_tag("#{p.photo_url}") %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-
- <%# link_to 'New Product', new_product_path %>
