@@ -12,3 +12,8 @@
 <p><%= button_to("New Category", new_category_path, method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
 
 <p><%= button_to("New Product", new_merchant_product_path(:merchant_id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
+
+<h2>Order Fulfillment</h2>
+
+<h3>Total Revenue</h3>
+<%= @merchant_oi_revenue %>
