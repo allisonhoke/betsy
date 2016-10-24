@@ -29,6 +29,20 @@ class OrdersController < ApplicationController
     end
   end
 
+  def cart
+    begin
+      @cart = Order.find(session[:order_id])
+      rescue ActiveRecord::RecordNotFound
+         @cart = Order.create
+         session[:order_id] = @cart.id
+    end
+    @items = @cart.order_items
+  end
+
+  def purchase
+    #redirect_to :show
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
