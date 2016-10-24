@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   patch "orders/update" => "orders#update"
   get "orders/confirmation" => "orders#purchase", as: "confirmation"
 
-  resources :order_items, only: [:delete]
 
   resources :products, only: [:index, :show] do
     resources :reviews, only: [:index, :show, :new, :create]
@@ -33,4 +32,6 @@ Rails.application.routes.draw do
   get "/sessions/login_failure", to: "sessions#login_failure", as: "login_failure"
   get "sessions" => "sessions#index"
   delete "sessions", to: "sessions#destroy"
+
+  resources :order_items, only: [:destroy]
 end
