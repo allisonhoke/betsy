@@ -4,11 +4,10 @@ class OrderTest < ActiveSupport::TestCase
   def setup
     @product1 = Product.create(name: "cat", price: 1000)
     @product2 = Product.create(name: "dog", price: 1234)
-    @order = Order.new(name: "Allison", email: "allison@email.com")
+    @order = Order.create(name: "Allison", email: "allison@email.com")
 
     @order.order_items << OrderItem.new(quantity: 1, product_id: @product1.id)
     @order.order_items << OrderItem.new(quantity: 1, product_id: @product2.id)
-    @order.save
   end
 
   test "Create an Order with all data" do
