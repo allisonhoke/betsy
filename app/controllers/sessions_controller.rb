@@ -9,20 +9,11 @@ class SessionsController < ApplicationController
       # User doesn't match anything in the DB.
       # Attempt to create a new user.
       @merchant = Merchant.build_from_github(auth_hash)
-      render :new_session_path unless @merchant.save
+      render :creation_failure and return unless @merchant.save
     end
 
     session[:merchant_id] = @merchant.id
-
-    redirect_to root_path
-  end
-
-  def new
-
-  end
-
-  def update
-
+    redirect_to root_path and return
   end
 
   def destroy
