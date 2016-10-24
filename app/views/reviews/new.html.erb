@@ -15,7 +15,6 @@
     <%= f.text_field :rating_description%>
     <br>
 
-    <%= f.label :product_id %>
     <%= f.hidden_field :product_id, value: @product.id %>
 
     <%= f.submit "Submit" %>
@@ -36,10 +35,8 @@
     <%= f.text_field :rating_description%>
     <br>
 
-    <%= f.label :product_id %>
     <%= f.hidden_field :product_id, value: @product.id %>
 
-    <%= f.label :merchant_id %>
     <%= f.hidden_field :merchant_id, value: @merchant.id %>
 
     <%= f.submit "Submit" %>

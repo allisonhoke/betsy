@@ -45,3 +45,11 @@ frog:
   photo_url: frog_jpg
   stock: 9
   merchant_id: merchants(:teeny_merchant).id
+
+chair:
+  name: Small chair
+  price: 98765
+  description: This is a chair
+  photo_url: chair_jpg
+  stock: 9
+  merchant_id: merchants(:other_merchant).id

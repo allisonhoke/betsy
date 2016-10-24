@@ -6,6 +6,7 @@ correct_review:
 no_description_review:
   rating_description: This'll all get set to nil before test.
   rating: 3
+  product_id: products(:narwal).id
 
 no_rating_review:
   rating_description: Yakkity chat chat blah.

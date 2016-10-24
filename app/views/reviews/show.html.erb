@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+<h2>Review for <%= @product.name %></h2>
+<p>STARS: <%= @review.rating %></p>
+<p>DESCRIPTION: <%= @review.rating_description %></p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %>
+<%= link_to "Back Home", root_path %>

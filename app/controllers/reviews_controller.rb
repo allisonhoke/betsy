@@ -10,19 +10,12 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    if @merchant.id == @product.merchant_id
+    # raise   # Once OAuth is done
+    if @current_user#.merchant_id == @merchant.id && @product.merchant_id == @mechant.id
       render :review_error
-    else
-      @review = Review.new
     end
-  end
 
-  def edit
-    if @review.update(review_params)
-      redirect_to review_path(@review)
-    else
-      render :edit
-    end
+    @review = Review.new
   end
 
   def create
@@ -37,16 +30,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-
-  def update
-
-  end
-
-
-  def destroy
-    @review.destroy
-
-  end
 
   private
 
