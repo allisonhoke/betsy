@@ -4,6 +4,10 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    if params[:category_id]
+      @products = Category.find(params[:category_id]).products
+      render :index
+    end
     @products = Product.all
   end
 
