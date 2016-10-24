@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:index]
   get "orders/:id/cart" => "orders#cart", as: "cart"
+  get "orders/:id/confirmation" => "orders#purchase", as: "confirmation"
 
   resources :products, only: [:index, :show] do
     resources :reviews, only: [:index, :show, :new, :create]
