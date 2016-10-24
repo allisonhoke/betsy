@@ -14,4 +14,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def cart
+    begin
+      @cart = Order.find(session[:order_id])
+    rescue ActiveRecord::RecordNotFound
+      @cart = Order.create
+      session[:order_id] = @cart.id
+    end
+    @items = @cart.order_items
+  end
 end

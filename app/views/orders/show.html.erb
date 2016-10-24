@@ -1,20 +1,8 @@
-<h1>Order Confirmation</h1>
+<h1>Cart</h1>
 
-<h3>Order Items:</h3>
 <% @items.each do |item| %>
-  <% product = item.find_product %>
-  <p><%= link_to "#{ product.name }", products_path %> <%#THIS ROUTE NEEDS TO BE CHANGED %>
-  <%= "quantity: #{ item.quantity }" %>
-  <%= "subtotal: #{ product.price * item.quantity }" %></p>
-<% end %>
+  <%= "Product: #{ item.find_product.name }" %> <%# add a link here %>
+  <%= "Subtotal: #{ item.find_product.price * item.quantity }" %>
+  <% end %>
 
-<p>
-  Total: <%= "#{ @total }" %>
-</p>
-
-<p>Order placed at <%= "#{ @order.updated_at }" %></p>
-
-
-QUESTIONS TO BE ADDRESSED:
-STATUS - what is this??
-PATH - path for viewing individual product details without merchant_id or category_id??
+  <%= link_to "Purchase this order", orders_edit_path, method: :get %>

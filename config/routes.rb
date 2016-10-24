@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]
   end
 
-  resources :orders, except: [:index]
+  resources :orders, only: [:new, :create]
+  get "order" => "orders#show"
+  get "orders/edit" => "orders#edit"
+  patch "orders/update" => "orders#update"
+  get "orders/cart" => "orders#cart", as: "cart"
+  get "orders/confirmation" => "orders#purchase", as: "confirmation"
 
   resources :products, only: [:index, :show] do
     resources :reviews, only: [:index, :show, :new, :create]
