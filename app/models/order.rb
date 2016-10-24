@@ -1,7 +1,6 @@
 class Order < ActiveRecord::Base
   has_many :order_items
   has_many :products, through: :order_items
-  validates :email, format: {with: /@/}
 
   def items_in_order
     self.order_items # returns collection of items in this order
