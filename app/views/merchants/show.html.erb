@@ -1,12 +1,16 @@
 <h1><%= @merchant.username %></h1>
 
 <h2>My Products</h2>
-
-<% @products.each do |product| %>
-  <p><%= product.name %> <%= button_to("Edit Product", edit_merchant_product_path(:merchant_id, product.id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
+<% if !@products.nil? %>
+  <% @products.each do |product| %>
+    <p><%= product.name %> <%= button_to("Edit Product", edit_merchant_product_path(:merchant_id, product.id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
     <p><img src= "<%= product.photo_url %>" ></p>
-  <p>Description: <%= product.description %></p>
-  <p>Stock: <%= product.stock %></p>
+    <p>Description: <%= product.description %></p>
+    <p>Stock: <%= product.stock %></p>
+  <% end %>
+  <% else %>
+  <h2>My Products</h2>
+  <p>No products yet<p>
 <% end %>
 
 <p><%= button_to("New Category", new_category_path, method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
@@ -17,3 +21,22 @@
 
 <h3>Total Revenue</h3>
 <%= @merchant_oi_revenue %>
+
+<h3>Total Revenue (by order status)</h3>
+<% if !@merchant_oi_revenue_by_status[0].nil? %>
+  <p>Pending: <%= @merchant_oi_revenue_by_status[0] %></p>
+<% else %>
+  <p>Pending: N/A</p>
+<% end %>
+
+<% if !@merchant_oi_revenue_by_status[1].nil? %>
+  <p>Paid: <%= @merchant_oi_revenue_by_status[1] %></p>
+<% else %>
+  <p>Paid: N/A</p>
+<% end %>
+
+<% if !@merchant_oi_revenue_by_status[2].nil? %>
+  <p>Complete: <%= @merchant_oi_revenue_by_status[2] %></p>
+<% else %>
+  <p>Complete: N/A</p>
+<% end %>
