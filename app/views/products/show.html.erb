@@ -9,8 +9,8 @@
   <p>Sold by:<%= " #{Merchant.find(@product.merchant_id).username
   }" %></p>
 
-<% form_for (@order_item) do |f| %>
-  <%= f.label :quantity %>
+<%= form_for @order_item, :url => product_order_items_path(@product), method: :post do |f| %>
+  <%= f.label :quantity, "Quantity" %>
   <%= f.text_field :quantity %>
-  <%= f.submit %>
+  <%= submit_tag "Add to cart" %>
 <% end %>
