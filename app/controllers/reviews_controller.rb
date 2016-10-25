@@ -10,8 +10,7 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    # raise   # Once OAuth is done
-    if @current_user#.merchant_id == @merchant.id && @product.merchant_id == @mechant.id
+    if session[:merchant_id] == @merchant.id && @product.merchant_id == @mechant.id
       render :review_error
     end
 

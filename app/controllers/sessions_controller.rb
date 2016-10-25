@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:merchant_id)
+    @current_user = nil
     redirect_to root_path
   end
 

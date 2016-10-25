@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    raise
     if params[:category_id]
       @products = Category.find(params[:category_id]).products
       render :index
