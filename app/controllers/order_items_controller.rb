@@ -1,9 +1,10 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:update, :destroy]
+  before_action :cart, only: [:update]
 
   def update
     @order_item.update(order_item_params)
-    render order_path # REVIEW: is this correct??
+    render order_path(@cart) # REVIEW: is this correct??
   end
 
   def destroy
