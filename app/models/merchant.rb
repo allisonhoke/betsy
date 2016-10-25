@@ -88,4 +88,44 @@ class Merchant < ActiveRecord::Base
 
     return pending_revenue, paid_revenue, complete_revenue
   end
+
+  def find_total_number_of_orders_by_status
+    merchant = Merchant.find(self.id)
+
+    products = Product.where(merchant_id: merchant.id)
+
+    if products == []
+      return nil, nil, nil
+    end
+
+    pending = 0
+    paid = 0
+    complete = 0
+
+    products.each do |product|
+      order_items = OrderItem.where([:product_id] == product.id)
+      order_items.each do |item|
+        if Order.find(item.order_id).status == 'pending'
+
+          if product.id == item.product_id
+            pending += 1
+          end
+
+        elsif Order.find(item.order_id).status == 'paid'
+
+          if product.id == item.product_id
+            paid += 1
+          end
+
+        elsif Order.find(item.order_id).status == 'complete'
+
+          if product.id == item.product_id
+            complete += 1
+          end
+        end
+      end
+    end
+    return pending, paid, complete
+  end
+
 end
