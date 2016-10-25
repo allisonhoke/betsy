@@ -1,19 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :purchase]
   before_action :cart, only: [:show, :edit, :update, :purchase]
 
   def show; end #this is the cart
 
-  def edit
-    set_order
-  end
+  def edit; end
 
   def update
-    set_order
-    @cart.email = :email
-    @cart.name = :name
-    if @cart.save # REVIEW: OR order.update(order_params)
-      redirect_to order_path(@cart) # REVIEW: where should this redirect to??
+    if @cart.save(order_params) # REVIEW: OR order.update(order_params)
+      redirect_to confirmation_path(@cart) # REVIEW: where should this redirect to??
     else
       render :edit
     end
