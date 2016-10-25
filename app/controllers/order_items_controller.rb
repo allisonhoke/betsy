@@ -9,7 +9,7 @@ class OrderItemsController < ApplicationController
 
 
   def create
-    id = Integer(params[:id])
+    id = Product.find(params[:id]).id
     @order_item = OrderItem.new(product_id: id, order_id: @cart.id)
 
     if @order_item.save(order_item_parms)
