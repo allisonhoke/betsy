@@ -5,6 +5,10 @@ class MerchantTest < ActiveSupport::TestCase
   test "Create a merchant with all valid data" do
     merchant = Merchant.new(username: "Tiny Things", email: "tiny@things.com")
     assert merchant.valid?
+
+    merchant = Merchant.new(username: "Tiny Things", email: "tiny@things.com")
+    assert merchant.valid?
+
   end
 
   test "Cannot create a merchant with no username" do
@@ -41,13 +45,6 @@ class MerchantTest < ActiveSupport::TestCase
     assert_not merchant2.valid?
   end
 
-  test "Can display all associated Products" do
-    merchant = merchants(:teeny_merchant)
-    products = Product.where(:merchant_id == merchant.id)
-    assert products.count == 6
-    assert products.nil? == false
-  end
-
   test "build_from_github does use github info to build a user" do
     auth_hash = OmniAuth.config.mock_auth[:github]
     test_merchant = Merchant.build_from_github(auth_hash)
@@ -56,11 +53,41 @@ class MerchantTest < ActiveSupport::TestCase
     assert_equal test_merchant.email, auth_hash['info']['email']
   end
 
+  test "build_from_github will use Github's nickname field if name is nil" do
+    auth_hash = OmniAuth.config.mock_auth[:github2]
+    test_merchant =Merchant.build_from_github(auth_hash)
+
+    assert_equal test_merchant.username, auth_hash['info']['nickname']
+    assert_equal test_merchant.email, auth_hash['info']['email']
+  end
+
   test "find_all_order_items_revenue shows the merchant's total revenue" do
-    merchant = merchants(:teeny_merchant)
+    merchant = merchants(:other_merchant)
     total_revenue = merchant.find_all_order_items_revenue
 
     assert_not_nil total_revenue
-    assert_equal 165000, total_revenue
+    assert_equal total_revenue, 98765
+  end
+
+  test "find_all_order_items_revenue should return nil if there's no products" do
+    merchant = merchants(:merchant_without_products)
+    total_revenue = merchant.find_all_order_items_revenue
+
+    assert_nil total_revenue
+  end
+
+  test "find_all_order_items_revenue_by_status shows the merchant's total revenue by status" do
+    merchant = merchants(:other_merchant)
+    total_revenue = merchant.find_all_order_items_revenue
+
+    assert_not_nil total_revenue
+    assert_equal total_revenue, [98765, 0, 0]
+  end
+
+  test "find_all_order_items_revenue_by_status should return nil if there's no products" do
+    merchant = merchants(:merchant_without_products)
+    total_revenue = merchant.find_all_order_items_revenue_by_status
+
+    assert_equal total_revenue, [nil, nil, nil]
   end
 end

@@ -5,7 +5,7 @@ cat:
   photo_url: some_address
   stock: 10
   merchant_id: merchants(:teeny_merchant).id
-  id: 1
+
 
 narwal:
   name: Narwal
@@ -14,7 +14,7 @@ narwal:
   photo_url: some_address
   stock: 1
   merchant_id: merchants(:teeny_merchant).id
-  id: 2
+
 
 dog:
   name: Large Dog
