@@ -21,27 +21,26 @@ class Merchant < ActiveRecord::Base
 
   def find_all_order_items_revenue
     merchant = Merchant.find(self.id)
-
     products = Product.where(merchant_id: merchant.id)
 
     if products == []
       return nil
     end
 
-    subtotals = []
+    oi_quantity = []
+    product_price = []
 
     products.each do |product|
-      order_items = OrderItem.where([:product_id] == product.id)
+      order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-
-        if product.id == item.product_id
-          subtotals.push(item.quantity * product.price)
-        end
+        oi_quantity.push(item.quantity)
+        product_price.push(product.price)
       end
     end
-
     sum = 0
-    sum = subtotals.reduce(:+)
+    oi_quantity.length.times do |i|
+      sum += oi_quantity[i-1] * product_price[i-1]
+    end
     return sum
   end
 
@@ -59,25 +58,16 @@ class Merchant < ActiveRecord::Base
     complete_subtotals = []
 
     products.each do |product|
-      order_items = OrderItem.where([:product_id] == product.id)
+      order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         if Order.find(item.order_id).status == 'pending'
-
-          if product.id == item.product_id
-            pending_subtotals.push(item.quantity * product.price)
-          end
+          pending_subtotals.push(item.quantity * product.price)
 
         elsif Order.find(item.order_id).status == 'paid'
-
-          if product.id == item.product_id
-            paid_subtotals.push(item.quantity * product.price)
-          end
+          paid_subtotals.push(item.quantity * product.price)
 
         elsif Order.find(item.order_id).status == 'complete'
-
-          if product.id == item.product_id
-            complete_subtotals.push(item.quantity * product.price)
-          end
+          complete_subtotals.push(item.quantity * product.price)
         end
       end
     end
@@ -103,29 +93,49 @@ class Merchant < ActiveRecord::Base
     complete = 0
 
     products.each do |product|
-      order_items = OrderItem.where([:product_id] == product.id)
+      order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         if Order.find(item.order_id).status == 'pending'
-
-          if product.id == item.product_id
-            pending += 1
-          end
+          pending += 1
 
         elsif Order.find(item.order_id).status == 'paid'
-
-          if product.id == item.product_id
-            paid += 1
-          end
+          paid += 1
 
         elsif Order.find(item.order_id).status == 'complete'
-
-          if product.id == item.product_id
-            complete += 1
-          end
+          complete += 1
         end
       end
     end
     return pending, paid, complete
   end
 
+  def find_orders_grouped_by_status
+    merchant = Merchant.find(self.id)
+
+    products = Product.where(merchant_id: merchant.id)
+
+    if products == []
+      return nil, nil, nil
+    end
+
+    pending_orders = []
+    paid_orders = []
+    complete_orders = []
+
+    products.each do |product|
+      order_items = OrderItem.where([:product_id] == product.id)
+      order_items.each do |item|
+        if Order.find(item.order_id).status == 'pending'
+          pending_orders.push( Order.find(item.order_id))
+
+        elsif Order.find(item.order_id).status == 'paid'
+          paid_orders.push(Order.find(item.order_id))
+
+        elsif Order.find(item.order_id).status == 'complete'
+          complete_orders.push(Order.find(item.order_id))
+        end
+      end
+    end
+    return pending_orders, paid_orders, complete_orders
+  end
 end
