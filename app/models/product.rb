@@ -12,5 +12,6 @@ class Product < ActiveRecord::Base
 
   def product_purchased(qty)
     self.stock -= qty
+    self.save
   end
 end
