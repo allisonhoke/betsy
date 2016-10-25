@@ -10,10 +10,8 @@ class OrdersController < ApplicationController
 
   def update
     set_order
-    @cart.email = :email
-    @cart.name = :name
-    if @cart.save # REVIEW: OR order.update(order_params)
-      redirect_to order_path(@cart) # REVIEW: where should this redirect to??
+    if @cart.save(order_params) # REVIEW: OR order.update(order_params)
+      redirect_to confirmation_path(@cart) # REVIEW: where should this redirect to??
     else
       render :edit
     end
