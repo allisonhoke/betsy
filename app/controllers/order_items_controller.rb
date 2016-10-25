@@ -7,6 +7,12 @@ class OrderItemsController < ApplicationController
   #
   # def edit
   # end
+  #
+  #
+  def update
+    @item = OrderItem.find(params[:id])
+    # @item.quantity = params[:item][:qty] #added this line here
+  end
 
   def destroy
     @item = OrderItem.find(params[:id]).destroy
