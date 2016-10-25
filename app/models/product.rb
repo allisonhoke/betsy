@@ -11,6 +11,6 @@ class Product < ActiveRecord::Base
   has_many :orders, through: :order_items
 
   def product_purchased(qty)
-    @product.stock -= qty
+    self.stock -= qty
   end
 end
