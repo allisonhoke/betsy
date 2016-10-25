@@ -1,16 +1,29 @@
 item_one:
   quantity: 1
-  product_id: 1
-  order_id: 10
-
+  product: cat
+  order: order_one
 
 item_two:
-  quantity: 2
-  product_id: 1
-  order_id: 20
-
+  quantity: 1
+  product: cat
+  order: order_two
 
 item_three:
-  quantity: 3
-  product_id: 2
-  order_id: 30
+  quantity: 1
+  product: dog
+  order: order_three
+
+item_four:
+  quantity: 1
+  product: chair
+  order: order_four
+
+item_five:
+  quantity: 1
+  product: chair
+  order: order_five
+
+item_six:
+  quantity: 1
+  product: chair
+  order: order_six
