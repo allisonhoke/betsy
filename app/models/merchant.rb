@@ -21,7 +21,8 @@ class Merchant < ActiveRecord::Base
 
   def find_all_order_items_revenue
     merchant = Merchant.find(self.id)
-    products = Product.where([:merchant_id] == merchant.id)
+
+    products = Product.where(merchant_id: merchant.id)
 
     if products.nil?
       puts "No Revenue"
