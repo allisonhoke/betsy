@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   # get "sessions" => "sessions#index"
   delete "sessions", to: "sessions#destroy"
 
-  resources :order_items, only: [:destroy]
+  resources :order_items, only: [:destroy, :update]
 end
