@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
 
-    redirect_to order_path
+    redirect_to order_path(@cart)
   end
 
   private
@@ -36,6 +36,6 @@ class OrderItemsController < ApplicationController
     end
 
     def order_item_params
-      params.require(:order_items).permit(:quantity)
+      params.require(:order_items).permit(:quantity, :product_id, :order_id)
     end
 end
