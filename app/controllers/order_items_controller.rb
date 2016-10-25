@@ -10,12 +10,10 @@ class OrderItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-
     @order_item = OrderItem.new
     @order_item.product_id = product.id
     @order_item.order_id = @cart.id
-    # @order_item.quantity = order_item_params[:quantity]
-
+    # @order_item.quantity = order_item_params[:quantity
     if @order_item.save(order_item_params)
       redirect_to :order_path
     else
