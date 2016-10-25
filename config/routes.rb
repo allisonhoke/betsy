@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :show, :new, :create]
   end
   get 'products/:id/add_to_cart' => "products#add_to_cart", as: "add_to_cart"
+  patch "products/:id/add_to_cart" => "products#add_to_cart"
 
 
   resources :merchants, only: [:show] do

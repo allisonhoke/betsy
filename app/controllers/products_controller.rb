@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product
+    @order_item = OrderItem.new(product_id: @product.id)
   end
 
   # GET /products/new
@@ -66,15 +66,15 @@ class ProductsController < ApplicationController
     end
   end
 
-  def add_to_cart(qty)
+  def add_to_cart
     #creates order if order isn't nil
     #creates order item for product being added and adds it to order that was just created or in the sessions if it already existed
     #takes in user input in the product show view for qty that user wants to add to cart
-    if OrderItem.create(quantity: @product.add_to_cart(qty), order_id: @order, product_id: @product)
-      redirect_to cart_path
-    else
-      render :cart_update_failure
+    @order_item.save
+    if @order_item.update(order_item_params)
+      redirect_to products_path
     end
+
   end
 
   private

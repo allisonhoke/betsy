@@ -9,11 +9,8 @@
   <p>Sold by:<%= " #{Merchant.find(@product.merchant_id).username
   }" %></p>
 
-
-
-<%= select("quantity", "quantity", @product.collect {|p| [ p.stock ] }) %>
-
-
-
-
-<%= link_to 'Back to All Products', products_path %>
+<% form_for (@order_item) do |f| %>
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity %>
+  <%= f.submit %>
+<% end %>
