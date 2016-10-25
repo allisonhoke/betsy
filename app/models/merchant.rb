@@ -9,7 +9,11 @@ class Merchant < ActiveRecord::Base
     merchant       = Merchant.new
     merchant.uid   = auth_hash[:uid]
     merchant.provider = 'github'
-    merchant.username  = auth_hash['info']['name']
+    if auth_hash['info']['name'] != nil
+      merchant.username  = auth_hash['info']['name']
+    else
+      merchant.username  = auth_hash['info']['nickname']
+    end
     merchant.email = auth_hash['info']['email']
 
     return merchant
@@ -18,6 +22,11 @@ class Merchant < ActiveRecord::Base
   def find_all_order_items_revenue
     merchant = Merchant.find(self.id)
     products = Product.where([:merchant_id] == merchant.id)
+
+    if products.nil?
+      puts "No Revenue"
+      return nil
+    end
 
     oi_quantity = []
     product_price = []
