@@ -14,12 +14,10 @@ class OrderItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     # def set_order_item
     #   @order_item = OrderItem.find(params[:id])
     # end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params
       params.require(:order_items).permit(:quantity)
     end
