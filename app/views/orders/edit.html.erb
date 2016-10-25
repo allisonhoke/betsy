@@ -1,6 +1,6 @@
 <h1>Please enter your information</h1>
 
-<%= form_for @order, :url => confimation_path do |f| %>
+<%= form_for @cart do |f| %>
       <p><%= f.label :email, "Email:" %>
         <%= f.text_field :email %></p>
 
