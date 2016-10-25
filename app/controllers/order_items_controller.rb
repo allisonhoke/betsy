@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:update, :destroy]
-  before_action :cart, only: [:create, :update]
+  before_action :cart, only: [:create, :update, :destroy]
 
   # def new
   #   product = Product.find(params[:id]).id
@@ -13,9 +13,10 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new
     @order_item.product_id = product.id
     @order_item.order_id = @cart.id
-    # @order_item.quantity = order_item_params[:quantity
-    if @order_item.save(order_item_params)
-      redirect_to :order_path
+    @order_item.quantity = order_item_params(params)[:quantity]
+
+    if @order_item.save
+      redirect_to order_path 
     else
       render :failed_order_update
     end
@@ -37,7 +38,7 @@ class OrderItemsController < ApplicationController
       @order_item = OrderItem.find(params[:id])
     end
 
-    def order_item_params
+    def order_item_params(params)
       params.require(:order_item).permit(:quantity, :product_id, :order_id)
     end
 end
