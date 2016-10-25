@@ -24,28 +24,24 @@ class Merchant < ActiveRecord::Base
 
     products = Product.where(merchant_id: merchant.id)
 
-    if products.nil?
-      puts "No Revenue"
+    if products == []
       return nil
     end
 
-    oi_quantity = []
-    product_price = []
+    subtotals = []
 
     products.each do |product|
       order_items = OrderItem.where([:product_id] == product.id)
       order_items.each do |item|
 
         if product.id == item.product_id
-          oi_quantity.push(item.quantity)
-          product_price.push(product.price)
+          subtotals.push(item.quantity * product.price)
         end
       end
     end
+
     sum = 0
-    oi_quantity.length.times do |i|
-      sum += oi_quantity[i-1] * product_price[i-1]
-    end
+    sum = subtotals.reduce(:+)
     return sum
   end
 
@@ -54,9 +50,8 @@ class Merchant < ActiveRecord::Base
 
     products = Product.where(merchant_id: merchant.id)
 
-    if products.nil?
-      puts "No Revenue"
-      return nil
+    if products == []
+      return nil, nil, nil
     end
 
     pending_subtotals = []
@@ -86,6 +81,7 @@ class Merchant < ActiveRecord::Base
         end
       end
     end
+
     pending_revenue = pending_subtotals.reduce(:+)
     paid_revenue = paid_subtotals.reduce(:+)
     complete_revenue = complete_subtotals.reduce(:+)
