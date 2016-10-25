@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
 
   resources :products, only: [:index, :show] do
+    resources :order_items, only: [:create]
     resources :reviews, only: [:index, :show, :new, :create]
   end
   get 'products/:id/add_to_cart' => "products#add_to_cart", as: "add_to_cart"
