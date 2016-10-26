@@ -8,6 +8,7 @@ class MerchantTest < ActiveSupport::TestCase
 
     merchant = Merchant.new(username: "Tiny Things", email: "tiny@things.com")
     assert merchant.valid?
+
   end
 
   test "Cannot create a merchant with no username" do
@@ -94,10 +95,10 @@ class MerchantTest < ActiveSupport::TestCase
 
   test "find_total_number_of_orders_by_status shows the merchant's number of orders by status" do
     merchant = merchants(:other_merchant)
-    total_orders_count = merchant.find_total_number_of_orders_by_status
+    total_orders = merchant.find_total_number_of_orders_by_status
 
-    assert_not_nil total_orders_count
-    assert_equal [1, 1, 1], total_orders_count
+    assert_not_nil total_orders
+    assert_equal [1, 1, 1], total_orders
   end
 
   test "find_total_number_of_orders_by_status should return 0 if there's no products" do
@@ -105,13 +106,5 @@ class MerchantTest < ActiveSupport::TestCase
     total_orders = merchant.find_total_number_of_orders_by_status
 
     assert_equal [0, 0, 0], total_orders
-  end
-
-  test "find_orders should find all orders of a merchant" do
-    merchant = merchants(:other_merchant)
-    total_orders = merchant.find_orders
-
-    assert_not_nil total_orders
-    assert_equal 3, total_orders
   end
 end

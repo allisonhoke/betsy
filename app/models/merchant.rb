@@ -27,6 +27,7 @@ class Merchant < ActiveRecord::Base
     sum = 0
 
     products.each do |product|
+      puts ">>>>> Product: #{product.name}"
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         sum += item.quantity * product.price
