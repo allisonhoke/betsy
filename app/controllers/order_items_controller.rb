@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:update, :destroy]
   before_action :cart, only: [:create, :update, :destroy]
+  skip_before_action :require_login, only: [:create, :update, :destroy]
 
   # def new
   #   product = Product.find(params[:id]).id
