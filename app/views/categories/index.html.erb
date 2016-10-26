@@ -21,8 +21,4 @@
 </table>
 
 <br>
-<% if session[:merchant_id] %>
-  <%= link_to new_category_path do %>
-    <div class="button">Add new category </div>
-  <% end %>
-<% end %>
+<%= merchant_only_button(new_category_path,"Add new category") %>
