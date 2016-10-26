@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :require_login, only: [:create]
 
   # def index
   #   @user = Merchant.find(session[:merchant_id]) # < recalls the value set in a previous request
@@ -22,6 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:merchant_id)
+    @current_user = nil
     redirect_to root_path
   end
 

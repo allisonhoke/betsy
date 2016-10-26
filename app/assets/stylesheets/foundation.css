@@ -366,7 +366,7 @@ th {
 
 html {
   font-size: 100%;
-  box-sizing: border-box; }
+  /*box-sizing: border-box; }*/
 
 *,
 *::before,
@@ -3404,7 +3404,7 @@ table.hover tr:nth-of-type(even):hover {
     clear: both; }
   .top-bar,
   .top-bar ul {
-    background-color: #e6e6e6; }
+    background-color: #99B2B7; }
   .top-bar input {
     max-width: 200px;
     margin-right: 1rem; }

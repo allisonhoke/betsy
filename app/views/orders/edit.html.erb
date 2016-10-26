@@ -1,6 +1,6 @@
 <h1>Please enter your information</h1>
 
-<%= form_for @cart do |f| %>
+<%= form_for @cart, :url => orders_update_path, method: :patch do |f| %>
       <p><%= f.label :email, "Email:" %>
         <%= f.text_field :email %></p>
 

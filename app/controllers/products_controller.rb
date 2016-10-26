@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
 
   def show
     @order_item = OrderItem.new(product_id: @product.id)
+    @latest_review = Review.all.where(product_id: params[:id]).order(:updated_at).first
   end
 
   # GET /products/new

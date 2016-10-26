@@ -14,20 +14,125 @@
  *= require_self
  */
 
+/***** BODY *****/
+body {
+   background-color: #D5DED9;
+}
+
+/****** Header *****/
+header {
+  background-color: #99B2B7;
+}
+
+nav {
+  background-color: #99B2B7;
+}
+
+.weebay {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 5em;
+  text-align: center;
+}
+.weebay a {
+  color: #7c0000;
+}
+.weebay a:hover {
+  color: #D9CEB2;
+}
+
+.motto-emphasize {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: .5em;
+  color: #9c0505;
+}
+
+.motto {
+  font-family: 'Patrick Hand SC', cursive;
+  text-align: center;
+}
+
+/*This is the nav bar links*/
 header li {
-  display: inline;
-  list-style: none;
+  font-size: 2em;
 }
 
-h1 {
-  font-size: 40px;
+/***** FONTS *****/
+/*Fancier fonts*/
+h1, h2, h3, h4, h5, h6, th, li {
+  font-family: 'Patrick Hand SC', cursive;
 }
 
-h2 {
-  font-size: 30px;
+/*Basic fonts*/
+p, td {
+  font-family: 'Yantramanav', sans-serif;
+  font-size: 1.5em;
 }
 
-#menu, #menu ul {
+/***** IMAGES *****/
+/*To keep our images semi-normal-sized all around*/
+img {
+  height: 200px;
+}
+
+/***** YIELD *****/
+/*This centers the main body and makes it a little narrower than the header*/
+main {
+  text-align: center;
+  width: 70em;
+  margin: 0 auto;
+  background-color: #D5DED9;
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
+
+/*Table formatting*/
+table {
+  background-color: #D5DED9;
+  border: none;
+  border-spacing: 0;
+}
+table tr th {
+  text-align: center;
+  background-color: #D5DED9;
+  font-size: 2em;
+  border: none;
+}
+
+table tr td {
+  background-color: #D5DED9;
+}
+
+table tr td:first-of-type {
+  font-size: 200%;
+}
+
+.button {
+  background-color: #7c0000;
+  font-family: 'Yantramanav', sans-serif;
+  font-size: 1.5em;
+}
+
+.button:hover {
+  background-color: #D9CEB2;
+  color: #7c0000;
+}
+/***** FOOTER *****/
+footer {
+  /*position: absolute;*/
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #99B2B7;
+}
+
+footer div p {
+  font-size: 1em;
+}
+
+
+/*Dropdown menu stuff*/
+/*#menu, #menu ul {
   list-style: none;
   padding: 0 0 26px 0;
   margin: 0;
@@ -36,13 +141,13 @@ h2 {
 }
 
 #menu li {
-  /*float: left;*/
+  float: left;
   margin-right: 3px;
-  /*position: relative;*/
+  position: relative;
 }
 
 #menu ul {
-  /*position: absolute;*/
+  position: absolute;
   top: 25px;
   left: -1px;
   width: 200px;
@@ -70,11 +175,6 @@ h2 {
 
 #menu li:hover ul {
   display: block;
-  /*background-color: lightgray;*/
+  /*background-color: lightgray;
   border-radius: 5%;
-}
-
-
-img {
-height: 200px;
-}
+}*/

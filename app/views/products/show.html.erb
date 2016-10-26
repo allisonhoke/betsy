@@ -1,16 +1,36 @@
-<p id="notice"><%= notice %></p>
-
 <h3>You know you wanna buy it!</h3>
 
-  <h4><%= @product.name %></h4>
-  <p><%= image_tag("#{@product.photo_url}") %></p>
-  <p><%= @product.description %></p>
-  <p>Price: $<%= "#{(@product.price)/100}" %>.00</p>
-  <p>Sold by:<%= " #{Merchant.find(@product.merchant_id).username
-  }" %></p>
+<h4><%= @product.name %></h4>
+<p><%= image_tag("#{@product.photo_url}") %></p>
+<p><%= @product.description %></p>
+<p>Price: $<%= "#{(@product.price)/100}" %>.00</p>
+<p>Sold by:<%= " #{Merchant.find(@product.merchant_id).username}" %></p>
+
 
 <%= form_for @order_item, :url => product_order_items_path(@product), method: :post do |f| %>
   <%= f.label :quantity, "Quantity" %>
   <%= f.text_field :quantity %>
   <%= submit_tag "Add to cart" %>
 <% end %>
+
+
+<br>
+<br>
+
+<h4>Latest review for <%= @product.name %></h4>
+<%= link_to product_reviews_path(@product) do %>
+  <div class="button"><h5>View all reviews</h5></div>
+<% end %>
+
+<table>
+  <tr>
+    <th>Rating</th>
+    <th>Rating Description</th>
+  </tr>
+  <% unless @latest_review.nil? %>
+  <tr>
+    <td><%= @latest_review.rating %></td>
+    <td><%= @latest_review.rating_description %>
+    </tr>
+  <% end %>
+</table>

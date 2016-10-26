@@ -21,6 +21,4 @@
 </table>
 
 <br>
-<% if @current_user %>
-  <%= link_to 'New Category - ONLY MERCHANTS CAN DO THIS', new_category_path %>
-<% end %>
+<%= merchant_only_button(new_category_path,"Add new category") %>

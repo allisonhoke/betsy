@@ -21,11 +21,12 @@ Rails.application.routes.draw do
 
 
   resources :merchants, only: [:show] do
+    get 'orders/:id' => 'orders#merchant_view', as: 'orders'
     resources :products, except: [:delete] do
       resources :reviews, only: [:show, :new, :create,:index]
     end
     resources :categories, except: [:edit, :update, :delete]
-    resources :orders, only: [:index, :show]
+    # resources :orders, only: [:merchant_view]
   end
 
   get "/auth/:provider/callback" =>  "sessions#create"

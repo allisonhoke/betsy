@@ -13,18 +13,24 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new
     @order_item.product_id = product.id
     @order_item.order_id = @cart.id
+
     @order_item.quantity = order_item_params(params)[:quantity]
 
     if @order_item.save
-      redirect_to order_path 
+      redirect_to order_path
+
     else
       render :failed_order_update
     end
   end
 
   def update
-    @order_item.update(order_item_params)
-    render order_path(@cart) # REVIEW: is this correct??
+    @order_item.quantity = order_item_params(params)[:quantity]
+    if @order_item.save
+      redirect_to order_path
+    else
+      render :failed_order_update
+    end
   end
 
   def destroy
