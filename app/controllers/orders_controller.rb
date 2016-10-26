@@ -4,11 +4,22 @@ class OrdersController < ApplicationController
 
   def show; end #this is the cart
 
+  def merchant_view #merchant_orders_path
+    @merchant = Merchant.find(params[:merchant_id])
+    @order = Order.find(params[:id])
+  end
+
   def edit; end
 
   def update
-    if @cart.save(order_params) # REVIEW: OR order.update(order_params)
-      redirect_to confirmation_path(@cart) # REVIEW: where should this redirect to??
+    @cart.name = order_params(params)[:name]
+    @cart.email = order_params(params)[:email]
+    @cart.address = order_params(params)[:address]
+    @cart.cc_number = order_params(params)[:cc_number][-4..-1] #saves last four digits only
+    @cart.expiration_date = order_params(params)[:expiration_date]
+    @cart.zip_code = order_params(params)[:zip_code]
+    if @cart.save
+      redirect_to confirmation_path(@cart)
     else
       render :edit
     end
@@ -37,7 +48,7 @@ class OrdersController < ApplicationController
       @cart = Order.find(session[:order_id])
     end
 
-    def order_params
+    def order_params(params)
       params.require(:order).permit(:name, :email, :address, :cc_number, :expiration_date, :cvv, :zip_code)
     end
 
