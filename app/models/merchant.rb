@@ -20,26 +20,18 @@ class Merchant < ActiveRecord::Base
   end
 
   def find_all_order_items_revenue
-    merchant = Merchant.find(self.id)
-    products = Product.where(merchant_id: merchant.id)
-
-    if products == []
+    if products.nil?
       return nil
     end
 
-    oi_quantity = []
-    product_price = []
+    sum = 0
 
     products.each do |product|
+      puts ">>>>> Product: #{product.name}"
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-        oi_quantity.push(item.quantity)
-        product_price.push(product.price)
+        sum += item.quantity * product.price
       end
-    end
-    sum = 0
-    oi_quantity.length.times do |i|
-      sum += oi_quantity[i-1] * product_price[i-1]
     end
     return sum
   end
@@ -49,7 +41,8 @@ class Merchant < ActiveRecord::Base
 
     products = Product.where(merchant_id: merchant.id)
 
-    if products == []
+    # keep this code style, and change tests to expect 0s
+    if products.nil?
       return nil, nil, nil
     end
 
@@ -84,7 +77,7 @@ class Merchant < ActiveRecord::Base
 
     products = Product.where(merchant_id: merchant.id)
 
-    if products == []
+    if products.nil?
       return nil, nil, nil
     end
 
@@ -109,33 +102,23 @@ class Merchant < ActiveRecord::Base
     return pending, paid, complete
   end
 
-  def find_orders_grouped_by_status
+  def find_orders
     merchant = Merchant.find(self.id)
 
     products = Product.where(merchant_id: merchant.id)
 
-    if products == []
-      return nil, nil, nil
+    if products.nil?
+      return nil
     end
 
-    pending_orders = []
-    paid_orders = []
-    complete_orders = []
+    orders = []
 
     products.each do |product|
       order_items = OrderItem.where([:product_id] == product.id)
       order_items.each do |item|
-        if Order.find(item.order_id).status == 'pending'
-          pending_orders.push( Order.find(item.order_id))
-
-        elsif Order.find(item.order_id).status == 'paid'
-          paid_orders.push(Order.find(item.order_id))
-
-        elsif Order.find(item.order_id).status == 'complete'
-          complete_orders.push(Order.find(item.order_id))
-        end
+        orders.push( Order.find(item.order_id))
       end
     end
-    return pending_orders, paid_orders, complete_orders
+    return orders
   end
 end
