@@ -1,4 +1,6 @@
-<h1><%= @merchant.username %></h1>
+<% if !@merchant.nil?  %>
+  <h1><%= @merchant.username %></h1>
+<% end %>
 
 <h2>My Products</h2>
 <% if !@products.nil? %>
@@ -63,3 +65,5 @@
 <% else %>
   <p>Complete: N/A</p>
 <% end %>
+
+<h3>Orders</h3>
