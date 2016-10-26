@@ -21,6 +21,8 @@
 </table>
 
 <br>
-<% if @current_user %>
-  <%= link_to 'New Category - ONLY MERCHANTS CAN DO THIS', new_category_path %>
+<% if session[:merchant_id] %>
+  <%= link_to new_category_path do %>
+    <div class="button">Add new category </div>
+  <% end %>
 <% end %>

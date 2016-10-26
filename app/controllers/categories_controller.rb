@@ -10,10 +10,6 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    # Once we get @current_user figured out
-    # if @current_user.merchant_id.nil?
-    #   render :category_error
-    # end
     @category = Category.new
   end
 

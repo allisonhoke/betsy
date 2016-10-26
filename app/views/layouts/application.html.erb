@@ -5,23 +5,23 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Patrick+Hand+SC|Yantramanav" rel="stylesheet">
 </head>
 <body>
-  <header class="top-bar">
-    <h1 class="title-area">Weebay:</h1>
-    <h3>It's The <small>Little</small> Things</h3>
+  <header>
+    <h1 class="weebay"><a href="/">Weebay</a></h1>
+    <h3 class="motto">It's the <small class="motto-emphasize">little</small> things</h3>
 
-    <nav class="top-bar">
+    <nav class="row">
 
-      <ul class="menu left-top-bar">
+      <ul class="menu small-6 columns">
         <li><%= link_to("Shop All", products_path) %></li>
         <% Category.all.each do |category| %>
         <li><%= link_to(category.name, category_products_path(category.id)) %></li>
         <% end %>
       </ul>
-
-      <ul class="menu right-top-bar">
-        <li><%= link_to("Home", root_path) %></li>
+      <div class="small-4 columns"></div>
+      <ul class="menu small-2 columns right">
         <% if session[:merchant_id].nil? %>
           <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
         <% else %>
@@ -41,14 +41,15 @@
     </nav>
   </header>
 
-<main>
-  <%= yield %>
-</main>
+  <main>
+    <%= yield %>
+  </main>
 
   <footer>
-    <span class="small-12 medium-12 large-12 columns">
-      <p>&copy; Team NnJYA <%= Time.now.year %> &nbsp (Nicole Url, Jennifer Owens, Yuri Nakashima, Allison Hoke)</p>
-    </span>
+    <div class="row">
+      <p class="small-4 columns">&copy; Team NYnJA <%= Time.now.year %></p>
+      <p class="small-8 columns text-right">(Nicole Url, Yuri Nakashima, Jennifer Owens, Allison Hoke)</p>
+    </div>
   </footer>
 </body>
 </html>
