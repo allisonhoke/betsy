@@ -1,12 +1,28 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :purchase]
   before_action :cart, only: [:show, :edit, :update, :purchase]
+  skip_before_action :require_login, only: [:show, :edit, :update, :purchase]
 
   def show; end #this is the cart
 
   def merchant_view #merchant_orders_path
-    @merchant = Merchant.find(params[:merchant_id])
-    @order = Order.find(params[:id])
+    if session[:merchant_id]
+      @current_merchant = session[:merchant_id]
+      @order = Order.find(params[:id])
+      @order_items = @order.order_items
+      @order_products = []
+      @order_items.each do |item|
+        @order_products << item.find_product
+      end
+
+      if @order_products.any? { |product| product.merchant_id == @current_merchant}
+        render :merchant_view
+      else
+        render :view_error
+      end
+    else
+      render :view_error
+    end
   end
 
   def edit; end
