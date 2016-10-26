@@ -8,6 +8,7 @@
     <p><%= product.name %> <%= button_to("Edit Product", edit_merchant_product_path(:merchant_id, product.id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
     <p><img src= "<%= product.photo_url %>" ></p>
     <p>Description: <%= product.description %></p>
+    <p>$<%= add_decimal(product.price) %></p>
     <p>Stock: <%= product.stock %></p>
   <% end %>
   <% else %>
