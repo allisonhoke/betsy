@@ -10,9 +10,14 @@ class Order < ActiveRecord::Base
     total = 0
 
     items_in_order.each do |item|
-      total += item.find_product.price
+      total += (item.find_product.price * item.quantity)
     end
 
     return total
+  end
+
+  def mark_as_paid
+    self.status = "paid"
+    self.save
   end
 end

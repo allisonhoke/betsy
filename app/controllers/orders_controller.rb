@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def edit; end
-  
+
   def update
     if @cart == nil # if the item does not exist
       redirect_to :index, flash: {notice: "That item does not exist."}
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     @cart.expiration_date = order_params(params)[:expiration_date]
     @cart.zip_code = order_params(params)[:zip_code]
     if @cart.save
-      redirect_to confirmation_path(@cart)
+      redirect_to confirmation_path#(@cart)
     else
       render :edit
     end
@@ -50,8 +50,7 @@ class OrdersController < ApplicationController
     @items = @cart.order_items
     @total = @cart.total
 
-    @cart.status = "paid"
-    @cart.save
+    @cart.mark_as_paid
 
     @items.each do |item|
       product = item.find_product
@@ -71,5 +70,4 @@ class OrdersController < ApplicationController
     def order_params(params)
       params.require(:order).permit(:name, :email, :address, :cc_number, :expiration_date, :cvv, :zip_code)
     end
-
 end
