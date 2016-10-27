@@ -1,10 +1,8 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_or_merchant, only: [:show, :edit, :update, :destroy]
 
   before_action :cart, only: [:add_to_cart]
 
-  # GET /products
-  # GET /products.json
   def index
     if params[:category_id]
       @products = Category.find(params[:category_id]).products
@@ -23,7 +21,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    merchant = Merchant.find(params[:id]).id
+    merchant = Merchant.find(params[:merchant_id]).id
     @product = Product.new(merchant_id: merchant)
   end
 
@@ -67,21 +65,18 @@ class ProductsController < ApplicationController
     end
   end
 
-  def add_to_cart
-    #creates order if order isn't nil
-    #creates order item for product being added and adds it to order that was just created or in the sessions if it already existed
-    #takes in user input in the product show view for qty that user wants to add to cart
-    @order_item.save
-    if @order_item.update(order_item_params)
-      redirect_to products_path
-    end
-
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
+    def set_product_or_merchant
+      begin
+        @product = Product.find(params[:id])
+        @merchant = Merchant.find(params[:merchant_id])
+
+      rescue
+        nil
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
