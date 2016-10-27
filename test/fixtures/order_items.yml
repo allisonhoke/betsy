@@ -27,3 +27,8 @@ item_six:
   quantity: 1
   product: chair
   order: order_six
+
+item_seven:
+  quantity: 1
+  product: chair
+  order: order_seven
