@@ -29,7 +29,15 @@ class Merchant < ActiveRecord::Base
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-        sum += item.quantity * product.price
+        if Order.find(item.order_id).status == 'pending'
+          sum += item.quantity * product.price
+
+        elsif Order.find(item.order_id).status == 'paid'
+          sum += item.quantity * product.price
+
+        elsif Order.find(item.order_id).status == 'complete'
+          sum += item.quantity * product.price
+        end
       end
     end
     return sum
