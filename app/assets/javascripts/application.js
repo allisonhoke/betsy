@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
+// http://www.w3schools.com/howto/howto_js_filter_table.asp & http://stackoverflow.com/questions/37634776/implementing-page-specific-java-script-and-css-in-a-ruby-on-rails-4-project 
+
 function myFunction() {
   // Declare variables
   var input, filter, table, tr, td, i;
