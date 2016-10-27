@@ -5,11 +5,11 @@
   <% product = item.find_product %>
   <p><%= link_to "#{ product.name }", product_path(product.id) %> <%#THIS ROUTE NEEDS TO BE CHANGED %>
   <%= "quantity: #{ item.quantity }" %>
-  <%= "subtotal: #{ product.price * item.quantity }" %></p>
+  <%= "subtotal: #{ add_decimal(product.price) * item.quantity }" %></p>
 <% end %>
 
 <p>
-  Total: <%= "#{ @total }" %>
+  Total: <%= "#{ add_decimal(@total) }" %>
 </p>
 
 <p>Order placed at <%= "#{ @cart.updated_at }" %></p>

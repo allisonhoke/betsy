@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>ALL PRODUCTS INDEX</h1>
+<h1>PRODUCTS</h1>
 
 <table>
   <thead>
@@ -13,7 +13,7 @@
     <% @products.each do |p| %>
       <tr>
         <td><%= link_to"#{p.name}", product_path(p.id) %></td>
-        <td>Price: $<%= "#{(p.price)/100}" %>.00</td>
+        <td>Price: $<%= "#{add_decimal(p.price)}" %></td>
         <td><%= image_tag("#{p.photo_url}") %> </td>
       </tr>
     <% end %>
