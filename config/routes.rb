@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     # resources :orders, only: [:merchant_view]
   end
 
+  # get 'merchants/:merchant_id/products/:id', to: 'products#show', as: 'merchant_product'
+
   get "/auth/:provider/callback" =>  "sessions#create"
 
   get "/sessions/login_failure", to: "sessions#login_failure", as: "login_failure"

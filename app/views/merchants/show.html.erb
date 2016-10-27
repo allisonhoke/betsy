@@ -9,12 +9,13 @@
     <p><img src= "<%= product.photo_url %>" ></p>
     <p>Description: <%= product.description %></p>
     <p>Stock: <%= product.stock %></p>
+
+    <p><%= link_to "Details", merchant_product_path(@merchant.id, product.id) %></p>
   <% end %>
-  <% else %>
+
   <h2>My Products</h2>
   <p>No products yet<p>
 <% end %>
-
 <p><%= button_to("New Category", new_category_path, method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
 
 <p><%= button_to("New Product", new_merchant_product_path(:merchant_id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
