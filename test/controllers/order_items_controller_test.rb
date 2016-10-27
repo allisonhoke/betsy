@@ -33,6 +33,16 @@ class OrderItemsControllerTest < ActionController::TestCase
     end
   end
 
+  test "if an item already exists in the cart, don't create a new order item, just add to current cart item's quantity" do
+    @product = Product.create(name: "product", price: 1234)
+    post :create, :product_id => @product.id, order_item: {quantity: 3}
+    assert_no_difference('OrderItem.count') do
+      post :create, :product_id => @product.id, order_item: {quantity: 7}
+    end
+
+    assert_not_nil OrderItem.where(product_id: @product.id, quantity: 10).first
+  end
+
   test "renders correct template if create fails to save" do
     @product = Product.create(name: "product", price: 1234)
     post :create, :product_id => @product.id, order_item: {quantity: -3}
