@@ -27,21 +27,23 @@ class Merchant < ActiveRecord::Base
     sum = 0
 
     products.each do |product|
-      puts ">>>>> Product: #{product.name}"
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-        sum += item.quantity * product.price
+        if Order.find(item.order_id).status == 'pending'
+          sum += item.quantity * product.price
+
+        elsif Order.find(item.order_id).status == 'paid'
+          sum += item.quantity * product.price
+
+        elsif Order.find(item.order_id).status == 'complete'
+          sum += item.quantity * product.price
+        end
       end
     end
     return sum
   end
 
   def find_all_order_items_revenue_by_status
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
-    # keep this code style, and change tests to expect 0s
     if products.nil?
       return nil, nil, nil
     end
@@ -73,17 +75,14 @@ class Merchant < ActiveRecord::Base
   end
 
   def find_total_number_of_orders_by_status
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
     if products.nil?
-      return nil, nil, nil
+      return nil, nil, nil, nil
     end
 
     pending = 0
     paid = 0
     complete = 0
+    cancelled = 0
 
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
@@ -96,17 +95,16 @@ class Merchant < ActiveRecord::Base
 
         elsif Order.find(item.order_id).status == 'complete'
           complete += 1
+
+        elsif Order.find(item.order_id).status == 'cancelled'
+          cancelled += 1
         end
       end
     end
-    return pending, paid, complete
+    return pending, paid, complete, cancelled
   end
 
   def find_orders
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
     if products.nil?
       return nil
     end
@@ -114,7 +112,7 @@ class Merchant < ActiveRecord::Base
     orders = []
 
     products.each do |product|
-      order_items = OrderItem.where([:product_id] == product.id)
+      order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         orders.push( Order.find(item.order_id))
       end

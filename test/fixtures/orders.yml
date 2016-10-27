@@ -39,3 +39,13 @@ order_six:
   expiration_date: 07/20
   cvv: 125
   zip_code: 90890
+
+order_seven:
+  name: Person7
+  email: person7email@email.com
+  status: cancelled
+  address: 1236 Sample Ave
+  cc_number: 1114
+  expiration_date: 07/20
+  cvv: 126
+  zip_code: 90891

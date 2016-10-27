@@ -26,8 +26,12 @@ class OrdersController < ApplicationController
   end
 
   def edit; end
-
+  
   def update
+    if @cart == nil # if the item does not exist
+      redirect_to :index, flash: {notice: "That item does not exist."}
+    end
+
     @cart.name = order_params(params)[:name]
     @cart.email = order_params(params)[:email]
     @cart.address = order_params(params)[:address]
