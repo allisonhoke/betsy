@@ -5,10 +5,13 @@
 <h2>My Products</h2>
 <% if !@products.nil? %>
 <% @products.each do |product| %>
-<p><%= product.name %> <%# merchant_only_button(edit_merchant_product_path, "Edit Product", :get, merchant_id: params[:id], product.id)%></p>
+<h3><%= product.name %></h3>
+<% if session[:merchant_id] == @merchant.id %>
+  <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
+<% end %>
 <p><img src= "<%= product.photo_url %>" ></p>
 <p>Description: <%= product.description %></p>
-<p>$<%= add_decimal(product.price) %></p>
+<p>Price: $<%= add_decimal(product.price) %></p>
 <p>Stock: <%= product.stock %></p>
 <% end %>
 <% else %>
