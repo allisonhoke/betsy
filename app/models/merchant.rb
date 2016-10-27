@@ -27,7 +27,6 @@ class Merchant < ActiveRecord::Base
     sum = 0
 
     products.each do |product|
-      puts ">>>>> Product: #{product.name}"
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         sum += item.quantity * product.price
@@ -37,11 +36,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def find_all_order_items_revenue_by_status
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
-    # keep this code style, and change tests to expect 0s
     if products.nil?
       return nil, nil, nil
     end
@@ -73,10 +67,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def find_total_number_of_orders_by_status
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
     if products.nil?
       return nil, nil, nil
     end
@@ -103,10 +93,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def find_orders
-    merchant = Merchant.find(self.id)
-
-    products = Product.where(merchant_id: merchant.id)
-
     if products.nil?
       return nil
     end
@@ -114,7 +100,7 @@ class Merchant < ActiveRecord::Base
     orders = []
 
     products.each do |product|
-      order_items = OrderItem.where([:product_id] == product.id)
+      order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
         orders.push( Order.find(item.order_id))
       end
