@@ -1,5 +1,19 @@
-<!-- <h1>New Product</h1>
+<h1>Add new product for this merchant</h1>
 
-<%# render 'form' %>
+<%= form_for @product, :url => {method: :post} do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
 
-<%# link_to 'Back', products_path %> -->
+  <%= f.label :price %>
+  <%=f.text_field :price %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :photo_url %>
+  <%= f.text_field :photo_url %>
+
+  <%= f.label :stock %>
+  <%= f.text_field :stock %>
+  <%= f.submit "Add Product" %>
+<% end %>

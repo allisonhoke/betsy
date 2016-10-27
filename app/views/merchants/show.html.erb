@@ -1,98 +1,98 @@
 <% unless @merchant.nil?  %>
-<h1><%= @merchant.username %></h1>
+  <h1><%= @merchant.username %></h1>
 <% end %>
 
 <h2>My Products</h2>
 <% if !@products.nil? %>
-<% @products.each do |product| %>
-<h3><%= product.name %></h3>
-<% if session[:merchant_id] == @merchant.id %>
-  <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
-<% end %>
-<p><img src= "<%= product.photo_url %>" ></p>
-<p>Description: <%= product.description %></p>
-<p>Price: $<%= add_decimal(product.price) %></p>
-<p>Stock: <%= product.stock %></p>
-<% end %>
+  <% @products.each do |product| %>
+    <h3><%= product.name %></h3>
+    <% if session[:merchant_id] == @merchant.id %>
+      <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
+    <% end %>
+      <p><img src= "<%= product.photo_url %>" ></p>
+      <p>Description: <%= product.description %></p>
+      <p>Price: $<%= add_decimal(product.price) %></p>
+      <p>Stock: <%= product.stock %></p>
+      <p><%= link_to "Details", merchant_product_path(@merchant.id, product.id) %></p>
+  <% end %>
 <% else %>
-<h2>My Products</h2>
-<p>No products yet<p>
-  <% end %>
-<% if session[:merchant_id] == @merchant.id %>
-  <p><%= link_to("New Category", new_category_path, class: "button", method: :get ) %> </p>
-  <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
+  <h2>My Products</h2>
+  <p>No products yet<p>
 <% end %>
 
-  <% if session[:merchant_id] == @merchant.id %>
-    <h2>Order Fulfillment</h2>
+<% if session[:merchant_id] == @merchant.id %>
+    <p><%= link_to("New Category", new_category_path, class: "button", method: :get ) %></p>
+    <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
 
-    <h3>Total Revenue</h3>
-    <% if @merchant_oi_revenue.nil? %>
-      <%= @merchant_oi_revenue %>
-    <% else %>
-      <p>No Revenue</p>
-    <% end %>
+  <h2>Order Fulfillment</h2>
 
-    <h3>Total Revenue (by order status)</h3>
-    <% if !@merchant_oi_revenue_by_status[0].nil? %>
-      <p>Pending: <%= @merchant_oi_revenue_by_status[0] %></p>
-    <% else %>
-      <p>Pending: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_revenue_by_status[1].nil? %>
-      <p>Paid: <%= @merchant_oi_revenue_by_status[1] %></p>
-    <% else %>
-      <p>Paid: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_revenue_by_status[2].nil? %>
-      <p>Complete: <%= @merchant_oi_revenue_by_status[2] %></p>
-    <% else %>
-      <p>Complete: N/A</p>
-    <% end %>
-
-    <h3>Number of Orders (by order status)</h3>
-    <% if !@merchant_oi_count_by_status[0].nil? %>
-      <p>Pending: <%= @merchant_oi_count_by_status[0] %></p>
-    <% else %>
-      <p>Pending: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_count_by_status[1].nil? %>
-      <p>Paid: <%= @merchant_oi_count_by_status[1] %></p>
-    <% else %>
-      <p>Paid: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_count_by_status[2].nil? %>
-      <p>Complete: <%= @merchant_oi_count_by_status[2] %></p>
-    <% else %>
-      <p>Complete: N/A</p>
-    <% end %>
-
-    <h3>Orders</h3>
-    <% if !@merchant_orders.nil? || @merchant_orders.count == 0 %>
-      <p>Search for Order Status (Pending, Paid, Complete, or Cancelled)</p>
-      <input type="text" id="orderStatusInput" onkeyup="myFunction()" placeholder="Search for Order Status (Pending, Paid, Complete, or Cancelled)">
-
-      <table id="merchantOrders">
-        <tr class="header">
-          <th style="width:60%;">Name</th>
-          <th style="width:60%;">Email</th>
-          <th style="width:60%;">Status</th>
-          <th style="width:60%;">Order Date</th>
-        </tr>
-        <% @merchant_orders.each do |order| %>
-          <tr>
-            <td> <%= order.name %> </td>
-            <td> <%= order.email %> </td>
-            <td> <%= order.status %> </td>
-            <td> <%= order.created_at.strftime("%A, %B %d, %Y") %> </td>
-          </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <p>No orders</p>
-    <% end %>
+  <h3>Total Revenue</h3>
+  <% if @merchant_oi_revenue.nil? %>
+    <%= @merchant_oi_revenue %>
+  <% else %>
+    <p>No Revenue</p>
   <% end %>
+
+  <h3>Total Revenue (by order status)</h3>
+  <% if !@merchant_oi_revenue_by_status[0].nil? %>
+    <p>Pending: <%= @merchant_oi_revenue_by_status[0] %></p>
+  <% else %>
+    <p>Pending: N/A</p>
+  <% end %>
+
+  <% if !@merchant_oi_revenue_by_status[1].nil? %>
+    <p>Paid: <%= @merchant_oi_revenue_by_status[1] %></p>
+  <% else %>
+    <p>Paid: N/A</p>
+  <% end %>
+
+  <% if !@merchant_oi_revenue_by_status[2].nil? %>
+    <p>Complete: <%= @merchant_oi_revenue_by_status[2] %></p>
+  <% else %>
+    <p>Complete: N/A</p>
+  <% end %>
+
+  <h3>Number of Orders (by order status)</h3>
+  <% if !@merchant_oi_count_by_status[0].nil? %>
+    <p>Pending: <%= @merchant_oi_count_by_status[0] %></p>
+  <% else %>
+    <p>Pending: N/A</p>
+  <% end %>
+
+  <% if !@merchant_oi_count_by_status[1].nil? %>
+    <p>Paid: <%= @merchant_oi_count_by_status[1] %></p>
+  <% else %>
+    <p>Paid: N/A</p>
+  <% end %>
+
+  <% if !@merchant_oi_count_by_status[2].nil? %>
+    <p>Complete: <%= @merchant_oi_count_by_status[2] %></p>
+  <% else %>
+    <p>Complete: N/A</p>
+  <% end %>
+
+  <h3>Orders</h3>
+  <% if !@merchant_orders.nil? || @merchant_orders.count == 0 %>
+    <p>Search for Order Status (Pending, Paid, Complete, or Cancelled)</p>
+    <input type="text" id="orderStatusInput" onkeyup="myFunction()" placeholder="Search for Order Status (Pending, Paid, Complete, or Cancelled)">
+
+    <table id="merchantOrders">
+      <tr class="header">
+        <th style="width:60%;">Name</th>
+        <th style="width:60%;">Email</th>
+        <th style="width:60%;">Status</th>
+        <th style="width:60%;">Order Date</th>
+      </tr>
+      <% @merchant_orders.each do |order| %>
+        <tr>
+          <td> <%= order.name %> </td>
+          <td> <%= order.email %> </td>
+          <td> <%= order.status %> </td>
+          <td> <%= order.created_at.strftime("%A, %B %d, %Y") %> </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>No orders</p>
+  <% end %>
+<% end %>
