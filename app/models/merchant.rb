@@ -68,12 +68,13 @@ class Merchant < ActiveRecord::Base
 
   def find_total_number_of_orders_by_status
     if products.nil?
-      return nil, nil, nil
+      return nil, nil, nil, nil
     end
 
     pending = 0
     paid = 0
     complete = 0
+    cancelled = 0
 
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
@@ -86,10 +87,13 @@ class Merchant < ActiveRecord::Base
 
         elsif Order.find(item.order_id).status == 'complete'
           complete += 1
+
+        elsif Order.find(item.order_id).status == 'cancelled'
+          cancelled += 1
         end
       end
     end
-    return pending, paid, complete
+    return pending, paid, complete, cancelled
   end
 
   def find_orders
