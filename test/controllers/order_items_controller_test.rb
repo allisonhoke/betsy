@@ -7,12 +7,19 @@ class OrderItemsControllerTest < ActionController::TestCase
     @order = Order.create(name: "Allison",  email: "a@b.com")
   end
 
-  # test "should update order_item" do
-  #   patch :update, id: order_items(:item_one), item_one: {quantity: 4, product_id: 1, order_id: 1}
-  #
-  #   assert_response :success
-  #   assert_template 'orders/show'
-  # end
+  test "should update order_item" do
+    patch :update, id: @order_item, order_item: {quantity: 4}
+
+    assert_response :redirect
+    assert_redirected_to order_path
+  end
+
+  test "should render correct template if order_item quantity update fails to save" do
+    patch :update, id: @order_item, order_item: {quantity: "abc"}
+
+    assert_response :error
+    # assert_template :failed_order_update
+  end
 
   test "should destroy order_item" do
     assert_difference('OrderItem.count', -1) do
