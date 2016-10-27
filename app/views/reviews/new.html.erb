@@ -2,12 +2,20 @@
 <% if @merchant.nil? && !@product.nil?%>
   <%= form_for @review, url:product_reviews_path(@product), method: :post, class: "form" do |f| %>
 
-    <%= f.label :rating %>
-    <%= f.radio_button(:rating, 1) %>
-    <%= f.radio_button(:rating, 2) %>
-    <%= f.radio_button(:rating, 3) %>
-    <%= f.radio_button(:rating, 4) %>
-    <%= f.radio_button(:rating, 5) %>
+  <%= f.radio_button(:rating, 1) %>
+  <%= f.label :rating, "1" %>
+
+  <%= f.radio_button(:rating, 2) %>
+  <%= f.label :rating, "2" %>
+
+  <%= f.radio_button(:rating, 3) %>
+  <%= f.label :rating, "3" %>
+
+  <%= f.radio_button(:rating, 4) %>
+  <%= f.label :rating, "4" %>
+
+  <%= f.radio_button(:rating, 5) %>
+  <%= f.label :rating, "5" %>
 
     <br>
 
@@ -22,12 +30,21 @@
 <% elsif @merchant && @product %>
   <%= form_for @review, url:merchant_product_reviews_path(@merchant,@product), method: :post, class: "form" do |f| %>
 
-    <%= f.label :rating %>
     <%= f.radio_button(:rating, 1) %>
+    <%= f.label :rating, "1" %>
+
     <%= f.radio_button(:rating, 2) %>
+    <%= f.label :rating, "2" %>
+
     <%= f.radio_button(:rating, 3) %>
+    <%= f.label :rating, "3" %>
+
     <%= f.radio_button(:rating, 4) %>
+    <%= f.label :rating, "4" %>
+
     <%= f.radio_button(:rating, 5) %>
+    <%= f.label :rating, "5" %>
+
 
     <br>
 
@@ -43,4 +60,4 @@
   <% end %>
 <% end %>
 
-<%= link_to "Back home", root_path %>
+<%= link_button("root_path", "Back home", :get) %>
