@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
   before_action :cart, only: [:create, :update, :destroy]
   skip_before_action :require_login, only: [:create, :update, :destroy]
 
-  def create
+  def create #all of this code should be refactored as a method in the model
     product = Product.find(params[:product_id])
 
     counter = 0
@@ -27,7 +27,6 @@ class OrderItemsController < ApplicationController
     end
 
       redirect_to order_path
-
 
     # end
 
