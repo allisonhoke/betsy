@@ -23,33 +23,25 @@
       <div class="small-4 columns"></div>
       <ul class="menu small-2 columns right">
         <% if session[:merchant_id].nil? %>
-          <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
+        <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
         <% else %>
-          <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
+        <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
         <li><%= link_to("Account Page", merchant_path(session[:merchant_id])) %></li>
         <% end %>
-        <!-- <ul id="menu">
-          <li><a href="#">Merchants</a>
-            <ul>
-              <#% Merchant.all.each do |merchant| %>
-              <li><#%= link_to(merchant.username, merchant_products_path(merchant.id)) %></li>
-              <#% end %>
-            </ul>
-          </li>
-        </ul> -->
       </ul>
-    </nav>
-  </header>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <%= yield %>
-  </main>
+<main>
+  <%= yield %>
+</main>
 
-  <footer>
-    <div class="row">
-      <p class="small-4 columns">&copy; Team NYnJA <%= Time.now.year %></p>
-      <p class="small-8 columns text-right">(Nicole Url, Yuri Nakashima, Jennifer Owens, Allison Hoke)</p>
-    </div>
-  </footer>
+<footer>
+  <div class="row">
+    <p class="small-4 columns">&copy; Team NYnJA <%= Time.now.year %></p>
+    <p class="small-8 columns text-right">(Nicole Url, Yuri Nakashima, Jennifer Owens, Allison Hoke)</p>
+  </div>
+</footer>
 </body>
 </html>

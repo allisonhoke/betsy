@@ -18,14 +18,14 @@ narwal:
 
 dog:
   name: Large Dog
-  price: 
+  price: 17
   description: Large dog doesn't belong on site
   photo_url: some_address
   stock: 4
   merchant: teeny_merchant
 
 horse:
-  name:
+  name: horse
   price: 10000
   description: Regular sized horse
   photo_url: horses_jpg

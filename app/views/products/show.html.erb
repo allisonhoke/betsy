@@ -27,8 +27,10 @@
     <th>Rating</th>
     <th>Rating Description</th>
   </tr>
+  <% unless @latest_review.nil? %>
   <tr>
     <td><%= @latest_review.rating %></td>
     <td><%= @latest_review.rating_description %>
-  </tr>
+    </tr>
+  <% end %>
 </table>

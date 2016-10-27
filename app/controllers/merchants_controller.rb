@@ -1,17 +1,16 @@
 class MerchantsController < ApplicationController
 
+  skip_before_action :require_login, only: [:show]
+
   def show
     begin
       @merchant = Merchant.find(params[:id])
     rescue ActiveRecord::RecordNotFound => err
       render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+      return
     end
 
-    begin
-      @products = Product.where(merchant_id: @merchant.id)
-    rescue ActiveRecord::RecordNotFound => err
-      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-    end
+    @products = Product.where(merchant_id: @merchant.id)
 
     @merchant_oi_revenue = @merchant.find_all_order_items_revenue
 
