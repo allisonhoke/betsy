@@ -3,12 +3,6 @@ class OrderItemsController < ApplicationController
   before_action :cart, only: [:create, :update, :destroy]
   skip_before_action :require_login, only: [:create, :update, :destroy]
 
-  # def new
-  #   product = Product.find(params[:id]).id
-  #   @order_item = OrderItem.new(product_id: product)
-  # end
-
-
   def create
     product = Product.find(params[:product_id])
     @order_item = OrderItem.new
@@ -16,10 +10,8 @@ class OrderItemsController < ApplicationController
     @order_item.order_id = @cart.id
 
     @order_item.quantity = order_item_params(params)[:quantity]
-
     if @order_item.save
       redirect_to order_path
-
     else
       render :failed_order_update
     end
@@ -36,8 +28,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item.destroy
-
-    redirect_to order_path(@cart)
+    redirect_to order_path
   end
 
   private
