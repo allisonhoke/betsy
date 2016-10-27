@@ -5,7 +5,7 @@
   <% product = item.find_product %>
   <p><%= link_to "#{ product.name }", product_path(product.id) %> <%#THIS ROUTE NEEDS TO BE CHANGED %>
   <%= "quantity: #{ item.quantity }" %>
-  <%= "subtotal: #{ add_decimal(product.price) * item.quantity }" %></p>
+  <%= "subtotal: #{ add_decimal(product.price * item.quantity) }" %></p>
 <% end %>
 
 <p>
