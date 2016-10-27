@@ -6,6 +6,6 @@ class HomeController < ApplicationController
     reviews.each do |review|
       @popular << Product.find(review.product_id)
     end
-    return @popular.uniq!.shuffle!
+    return @popular.uniq!
   end
 end

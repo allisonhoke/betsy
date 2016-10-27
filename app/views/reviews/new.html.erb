@@ -3,11 +3,11 @@
   <%= form_for @review, url:product_reviews_path(@product), method: :post, class: "form" do |f| %>
 
     <%= f.label :rating %>
-    <%= f.radio_button(:rating, 1) %>
-    <%= f.radio_button(:rating, 2) %>
-    <%= f.radio_button(:rating, 3) %>
-    <%= f.radio_button(:rating, 4) %>
-    <%= f.radio_button(:rating, 5) %>
+    <%= f.radio_button(:rating, "1", 1) %>
+    <%= f.radio_button(:rating, "2", 2) %>
+    <%= f.radio_button(:rating, "3", 3) %>
+    <%= f.radio_button(:rating, "4", 4) %>
+    <%= f.radio_button(:rating, "5", 5) %>
 
     <br>
 
@@ -39,8 +39,8 @@
 
     <%= f.hidden_field :merchant_id, value: @merchant.id %>
 
-    <%= f.submit "Submit" %>
+    <%= f.submit "Submit", class: "button" %>
   <% end %>
 <% end %>
 
-<%= link_to "Back home", root_path %>
+<%= link_button("root_path", "Back home", :get) %>

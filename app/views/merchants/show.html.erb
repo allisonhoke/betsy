@@ -15,6 +15,7 @@
 
     <p><%= link_to "Details", merchant_product_path(@merchant.id, product.id) %></p>
   <% end %>
+<<<<<<< HEAD
 <% end %>
 
 <p><%= button_to("New Category", new_category_path, method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
@@ -22,6 +23,14 @@
 <p><%= button_to("New Product", new_merchant_product_path(:merchant_id), method: :get ) %> (WILL BE MERCHANT-VIEW ONLY)</p>
 
   <%# if session[:merchant_id] == params[:merchant_id] %>
+=======
+<% if session[:merchant_id] == @merchant.id %>
+  <p><%= link_to("New Category", new_category_path, class: "button", method: :get ) %> </p>
+  <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
+<% end %>
+
+  <% if session[:merchant_id] == @merchant.id %>
+>>>>>>> fcd23f449dec1ede3f112d62e0f27b0d0a7fa594
     <h2>Order Fulfillment</h2>
 
     <h3>Total Revenue</h3>
@@ -93,4 +102,4 @@
     <% else %>
       <p>No orders</p>
     <% end %>
-  <%# end %>
+  <% end %>
