@@ -28,7 +28,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item.destroy
-    redirect_to order_path(@cart)
+    redirect_to order_path
   end
 
   private
