@@ -28,6 +28,9 @@
         <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
         <li><%= link_to("Account Page", merchant_path(session[:merchant_id])) %></li>
         <% end %>
+        <% if session[:order_id] %>
+        <li><%= link_to("View Cart", order_path, method: :get)%></li>
+        <% end %>
       </ul>
     </ul>
   </nav>
