@@ -1,4 +1,12 @@
-<h2>You cannot edit a product that is not yours</h2>
+<article class="row">
+  <section class="small-12 medium-4 columns" >
+    <img src="/assets/small_fry_sad.png" alt="sad small fry" class="sad-fry" />
+  </section>
 
-<h4><%= link_to "Back home", root_path %></h4>
-<h4><%= link_to "Back to my merchant page", merchant_path(session[:merchant_id]) %></h4>
+  <section class="small-12 medium-8 columns">
+    <h2>You cannot edit a product that is not yours</h2>
+    <h5><%= link_to "Continue shopping", root_path %></h5>
+    <h5><%= link_to "Back to my merchant page", merchant_path(session[:merchant_id]) %></h5>
+  </section>
+
+</article>

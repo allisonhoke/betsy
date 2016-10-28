@@ -97,6 +97,11 @@ img {
   opacity: 1;
 }
 
+.sad-fry {
+  height: 200px;
+  padding-left: 2em;
+}
+
 /***** YIELD *****/
 /*This centers the main body and makes it a little narrower than the header*/
 main {

@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
 
   def new
     if !@merchant.nil?
-      if session[:merchant_id] == @merchant.id && @product.merchant_id == @mechant.id
+      if session[:merchant_id] == @merchant.id && @product.merchant_id == @merchant.id
         render :review_error
       end
     end
