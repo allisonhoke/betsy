@@ -51,7 +51,7 @@ class Merchant < ActiveRecord::Base
           sum += item.quantity * product.price
         end
 
-      elsif Order.find(item.order_id).status == 'shipped'
+        elsif Order.find(item.order_id).status == 'shipped'
           sum += item.quantity * product.price
         end
       end
@@ -178,6 +178,6 @@ class Merchant < ActiveRecord::Base
         order_details.push([Order.find(item.order_id).id, product.name, product.id, item.quantity, product.price * item.quantity])
       end
     end
-      return order_details
+    return order_details
   end
 end
