@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category_products = @category.products
+    @category_products = @category.products.uniq!
   end
 
   def new
