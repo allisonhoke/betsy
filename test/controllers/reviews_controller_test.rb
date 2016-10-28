@@ -41,7 +41,6 @@ class ReviewsControllerTest < ActionController::TestCase
     assert_template :new
   end
 
-  ### Test later ####
   test "New should create a new review if not logged in" do
     session[:merchant_id] = nil
     get :new, product_id: @product.id, merchant_id: @merchant.id
