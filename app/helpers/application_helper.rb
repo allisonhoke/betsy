@@ -6,6 +6,7 @@ module ApplicationHelper
       end
     end
   end
+  
   # solution from http://stackoverflow.com/questions/7461290/convert-cents-into-dollar-string-in-ruby-without-use-of-bigdecimal
   def add_decimal(cents)
     pfx = [ '0.00', '0.0', '0.' ]
