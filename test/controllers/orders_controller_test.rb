@@ -9,6 +9,8 @@ class OrdersControllerTest < ActionController::TestCase
     @product = Product.create(name: "Product", price: 1234, merchant_id: @merchant.id, stock: 4)
     @order_item = OrderItem.create(quantity: 2, order_id: @order.id, product_id: @product.id)
     session[:order_id] = @order.id
+    session[:ship_order_id] = @order_two.id
+    session[:merchant_id] = @merchant.id
   end
 
   test "should show order" do
@@ -17,7 +19,6 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should show merchant_view to correct merchant" do
-    session[:merchant_id] = @merchant.id
     get :merchant_view, :merchant_id => session[:merchant_id], id: @order.id
     assert_template :merchant_view
   end
@@ -47,5 +48,10 @@ class OrdersControllerTest < ActionController::TestCase
   test "#purchase clears the cart" do
     get :purchase, id: @order
     assert_equal session[:order_id], nil
+  end
+
+  test "#ship redirects to the correct path" do
+    patch :ship, id: session[:ship_order_id]
+    assert_redirected_to merchant_path(session[:merchant_id])
   end
 end

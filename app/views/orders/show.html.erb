@@ -13,4 +13,4 @@
   <p><%= button_to "Remove this product", order_item_path(item.id), method: :delete %>
   <% end %></p>
 
-  <p><%= button_to "Purchase this order", orders_edit_path, method: :get %></p>
+<p><%= link_button("orders_edit_path", "Purchase this order", :get) %></p>
