@@ -1,6 +1,10 @@
 class MerchantsController < ApplicationController
 
-  skip_before_action :require_login, only: [:show]
+  skip_before_action :require_login, only: [:index, :show]
+
+  def index
+    @merchants = Merchant.all
+  end
 
   def show
     begin
@@ -19,5 +23,9 @@ class MerchantsController < ApplicationController
     @merchant_oi_count_by_status = @merchant.find_total_number_of_orders_by_status
 
     @merchant_orders = @merchant.find_orders
+
+    @merchant_order_items = @merchant.find_order_items_from_orders.flatten
+
+
   end
 end
