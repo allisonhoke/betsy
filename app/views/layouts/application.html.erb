@@ -14,14 +14,16 @@
 
     <nav class="row">
 
-      <ul class="menu small-6 columns">
+      <ul class="menu large-6 small-12 columns">
         <li><%= link_to("Shop All", products_path) %></li>
+        <li><%= link_to("Shop Merchants", merchants_path) %></li>
+        <li><%= "#{    }" %></li>
         <% Category.all.each do |category| %>
         <li><%= link_to(category.name, category_products_path(category.id)) %></li>
         <% end %>
       </ul>
-      <div class="small-4 columns"></div>
-      <ul class="menu small-2 columns right">
+      <div class="large-1 columns"></div>
+      <ul class="menu large-5 small-12 columns text-right">
         <% if session[:merchant_id].nil? %>
         <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
         <% else %>
