@@ -153,25 +153,40 @@ class Merchant < ActiveRecord::Base
       return nil
     end
 
-    product_name = []
-    quantity = []
-    subtotal = []
+    order_details = []
 
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-        product_name.push(Product.find_by(id: product.id).name)
-        quantity.push(item.quantity)
-        subtotal.push(Product.find_by(id: product.id).price * item.quantity)
+        order_details.push([Product.find_by(id: product.id).name, item.quantity, Product.find_by(id: product.id).price * item.quantity])
       end
     end
 
-    if !subtotal.nil?
-      subtotal.each do |monies|
-        subtotal.push("$" + add_decimal(monies))
-        subtotal.shift
-      end
-    end
-    return product_name, quantity, subtotal
+    # if !order_details.nil?
+    #   order_details.each_with_index.map do |order, index|
+    #     if order[index] % 3 == 0
+    #       order_details[order][index] = "$" + add_decimal(order_details[order][index])
+    #     end
+    #   end
+      return order_details
+    # end
   end
+
+    def find_order_ids_from_order_items
+      if products.nil?
+        return nil
+      end
+
+      order_ids = []
+
+      products.each do |product|
+        order_items = OrderItem.where(product_id: product.id)
+
+        order_items.each do |item|
+          order_ids.push(item.order_id)
+        end
+      end
+      puts order_ids
+      return order_ids
+    end
 end
