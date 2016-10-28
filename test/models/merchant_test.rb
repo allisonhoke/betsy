@@ -90,7 +90,7 @@ class MerchantTest < ActiveSupport::TestCase
     merchant = merchants(:merchant_without_products)
     total_revenue = merchant.find_all_order_items_revenue_by_status
 
-    assert_equal [nil, nil, nil], total_revenue
+    assert_equal [nil, nil, nil, nil], total_revenue
   end
 
   test "find_total_number_of_orders_by_status shows the merchant's number of orders by status" do
@@ -98,13 +98,13 @@ class MerchantTest < ActiveSupport::TestCase
     total_orders = merchant.find_total_number_of_orders_by_status
 
     assert_not_nil total_orders
-    assert_equal [1, 1, 1, 1], total_orders
+    assert_equal [1, 1, 1, 1, 1], total_orders
   end
 
   test "find_total_number_of_orders_by_status should return 0 if there's no products" do
     merchant = merchants(:merchant_without_products)
     total_orders = merchant.find_total_number_of_orders_by_status
 
-    assert_equal [0, 0, 0, 0], total_orders
+    assert_equal [0, 0, 0, 0, 0], total_orders
   end
 end

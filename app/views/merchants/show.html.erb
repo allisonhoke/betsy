@@ -47,8 +47,8 @@
 
     <h3>Orders</h3>
     <% if !@merchant_orders.nil? || @merchant_orders.count == 0 %>
-      <p>Search for Order Status (Pending, Paid, Complete, or Cancelled)</p>
-      <input type="text" id="orderStatusInput" onkeyup="myFunction()" placeholder="Search for Order Status (Pending, Paid, Complete, or Cancelled)">
+      <p>Search for Order Status (Pending, Paid, Complete, Cancelled, or Shipped)</p>
+      <input type="text" id="orderStatusInput" onkeyup="myFunction()" placeholder="Search for Order Status (Pending, Paid, Complete, Cancelled, or Shipped)">
 
       <table id="merchantOrders">
         <tr class="header">
