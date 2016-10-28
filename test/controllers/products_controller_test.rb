@@ -1,20 +1,24 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
+  setup do
+    @product = products(:narwal)
+    @merchant = merchants(:teeny_merchant)
+  end
+
   test "should get products index" do
     get :index
     assert_response :success
     assert_template :index
   end
 
-  test "should get the new form for a new product" do
-    get :new
+  test "should get the new form for a new product for that merchant" do
+    get :new, merchant_id: @merchant.id
     assert_response :success
     assert_template :new
 
     new_product = assigns(:product)
     assert_not_nil new_product
-    assert_nil new_product.id
   end
 
   test "should show requested product" do
@@ -36,7 +40,7 @@ class ProductsControllerTest < ActionController::TestCase
     id = products(:cat).id
     patch :update, {id: id, product: {name: "Updated Cat"} }
      assert_equal "Updated Cat", Product.find(id).name
-    #  assert_redirected_to product_path
+     assert_redirected_to product_path
   end
 
   test "destroy should delete the product" do
@@ -45,6 +49,6 @@ class ProductsControllerTest < ActionController::TestCase
       delete :destroy, {id: id}
     end
 
-    # assert_redirected_to products_path
+    assert_redirected_to merchant_path
   end
 end

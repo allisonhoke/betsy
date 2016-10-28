@@ -53,6 +53,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+    redirect_to merchant_path(@merchant)
   end
 
 
