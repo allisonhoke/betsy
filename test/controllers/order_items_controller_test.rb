@@ -5,10 +5,10 @@ class OrderItemsControllerTest < ActionController::TestCase
     @order_item = OrderItem.create(quantity: 2, product_id: 1, order_id: 1)
     @another_order_item = OrderItem.create(quantity: 1, product_id: 2, order_id: 1)
     @order = Order.create(name: "Allison",  email: "a@b.com")
+    @product = Product.create(name: "product", price: 1234, stock: 20)
   end
 
   test "should be able to create a new order item" do
-    @product = Product.create(name: "product", price: 1234)
     @cart = Order.create(name: "name", email: "email@email.com")
     post :create, :product_id => @product.id, order_item: {quantity: 2}
     assert_response :redirect
@@ -16,7 +16,6 @@ class OrderItemsControllerTest < ActionController::TestCase
   end
 
   test "Newly created order items should have the right fields" do
-    @product = Product.create(name: "product", price: 1234)
     post :create, :product_id => @product.id, order_item: {quantity: 3}
 
     item = OrderItem.find_by(quantity: 3)
@@ -27,14 +26,24 @@ class OrderItemsControllerTest < ActionController::TestCase
   end
 
   test "creating a new item should change the total number of items" do
-    @product = Product.create(name: "product", price: 1234)
     assert_difference('OrderItem.count', 1) do
       post :create, :product_id => @product.id, order_item: {quantity: 3}
     end
   end
 
+  test "trying to add a quantity greater than the stock will not work" do
+    assert_no_difference('OrderItem.count') do
+      post :create, :product_id => @product.id, order_item: {quantity: 200}
+    end
+  end
+
+  test "trying to add a quantity greater than the stock will render the correct page" do
+    post :create, :product_id => @product.id, order_item: {quantity: 200}
+
+    assert_template :not_enough_stock
+  end
+
   test "if an item already exists in the cart, don't create a new order item, just add to current cart item's quantity" do
-    @product = Product.create(name: "product", price: 1234)
     post :create, :product_id => @product.id, order_item: {quantity: 3}
     assert_no_difference('OrderItem.count') do
       post :create, :product_id => @product.id, order_item: {quantity: 7}
@@ -44,7 +53,6 @@ class OrderItemsControllerTest < ActionController::TestCase
   end
 
   test "renders correct template if create fails to save" do
-    @product = Product.create(name: "product", price: 1234)
     post :create, :product_id => @product.id, order_item: {quantity: -3}
 
     assert_template :failed_order_update
