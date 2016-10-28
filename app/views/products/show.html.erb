@@ -10,7 +10,7 @@
 <%= form_for @order_item, :url => product_order_items_path(@product), method: :post do |f| %>
   <%= f.label :quantity, "Quantity" %>
   <%= f.text_field :quantity %>
-  <%= submit_tag "Add to cart" %>
+  <%= f.submit("Add to cart", class: "button")%>
 <% end %>
 
 
