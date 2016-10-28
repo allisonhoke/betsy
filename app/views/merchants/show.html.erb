@@ -6,24 +6,21 @@
 <% if !@products.nil? %>
   <% @products.each do |product| %>
     <h3><%= product.name %></h3>
-    <% if session[:merchant_id] == @merchant.id %>
+    <%# if session[:merchant_id] == @merchant.id %>
       <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
-    <% end %>
-      <p><img src= "<%= product.photo_url %>" ></p>
-      <p>Description: <%= product.description %></p>
-      <p>Price: $<%= add_decimal(product.price) %></p>
-      <p>Stock: <%= product.stock %></p>
-      <p><%= link_to "Details", merchant_product_path(@merchant.id, product.id) %></p>
+    <%# end %>
+    <p><img src= "<%= product.photo_url %>" ></p>
+    <p>Description: <%= product.description %></p>
+    <p>Price: $<%= add_decimal(product.price) %></p>
+    <p>Stock: <%= product.stock %></p>
   <% end %>
 <% else %>
-  <h2>My Products</h2>
-  <p>No products yet<p>
+<h2>My Products</h2>
+<p>No products yet<p>
 <% end %>
-
-<% if session[:merchant_id] == @merchant.id %>
-    <p><%= link_to("New Category", new_category_path, class: "button", method: :get ) %></p>
-    <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
-
+<%# if session[:merchant_id] == @merchant.id %>
+  <p><%= link_to("New Category", new_category_path, class: "button", method: :get) %></p>
+  <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
   <h2>Order Fulfillment</h2>
 
   <h3>Total Revenue</h3>
@@ -85,14 +82,23 @@
       </tr>
       <% @merchant_orders.each do |order| %>
         <tr>
-          <td> <%= order.name %> </td>
+          <td> <%= link_to(order.name, merchant_orders_path(@merchant.id, order.id), method: :get) %> </td>
           <td> <%= order.email %> </td>
           <td> <%= order.status %> </td>
-          <td> <%= order.created_at.strftime("%A, %B %d, %Y") %> </td>
+          <td> <%= order.updated_at.strftime("%A, %B %d, %Y") %> </td>
         </tr>
+        <%# @merchant_order_items.length.times do |i| %>
+          <!-- <tr>
+            <tr class="header">
+            <th style="width:60%;">Product Name</th>
+            <th style="width:60%;">Quantity</th>
+            <th style="width:60%;">Subtotal</th>
+          </tr>
+            <td> <%# @merchant_order_items[i] %> </td> -->
+        <%# end %>
       <% end %>
     </table>
   <% else %>
     <p>No orders</p>
   <% end %>
-<% end %>
+<%# end %>
