@@ -100,27 +100,21 @@
       </table>
 
       <table>
-      <tr class="header">
-        <th style="width:10%;">Name</th>
-      </tr>
       <% index = 0 %>
-
       <% @merchant_orders.each do |order| %>
       <% if index == 0 %>
-        <tr>
-            <td> <%= order.name %> </td>
-        </tr>
         <tr class="header">
           <th style="width:10%;">Order #</th>
+          <th style="width:10%;">Name</th>
           <th style="width:10%;">Product Name</th>
           <th style="width:10%;">Product Details</th>
           <th style="width:10%;">Quantity</th>
           <th style="width:10%;">Subtotal</th>
-          <th style="width:10%;">&nbsp;</th>
         </tr>
         <% end %>
         <tr>
           <td><%= @merchant_order_items[index][0] %></td>
+          <td> <%= order.name %> </td>
           <td><%= @merchant_order_items[index][1] %></td>
           <td><%= link_to("Link", product_path(@merchant_order_items[index][2])) %></td>
           <td><%= @merchant_order_items[index][3] %></td>
@@ -129,8 +123,6 @@
           <% else %>
             <%= add_decimal(@merchant_order_items[index][4]) %></td>
           <% end %>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
           <% index += 1 %>
         </tr>
       <% end %>

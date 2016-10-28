@@ -18,6 +18,7 @@
 <br>
 
 <h4>Latest review for <%= @product.name %></h4>
+<p><%= link_to "Review this", new_product_review_path(@product) %></p>
 <p><%= link_to "All reviews", product_reviews_path(@product) %></p>
 
 <table>
