@@ -24,5 +24,8 @@
 
   <%= f.label :stock %>
   <%= f.text_field :stock %>
+
+  <%= f.select :category_ids, Category.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+
   <%= f.submit "Add Product" %>
 <% end %>
