@@ -22,12 +22,12 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new(merchant_id: @merchant.id)
+    @product = Product.new
   end
 
   def create
     @product = Product.new(product_params)
-    @product.merchant = @merchant
+    @product.merchant_id = @merchant.id
     if @product.save
       redirect_to merchant_path(@merchant)
     else
@@ -51,9 +51,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  def destroy
-    @product.destroy
-  end
+  # def destroy
+  #   @product.destroy
+  #   redirect_to merchant_path(@merchant)
+  # end
 
 
   private
