@@ -92,7 +92,7 @@ class Merchant < ActiveRecord::Base
     end
 
     if !paid_revenue.nil?
-      paid_subtotals_revenue = "$" + add_decimal(paid_revenue)
+      paid_revenue = "$" + add_decimal(paid_revenue)
     end
 
     if !complete_revenue.nil?
