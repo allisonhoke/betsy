@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show]
   before_action :set_product_or_merchant, only: [:index, :show, :new]
+  skip_before_action :require_login
 
   def index
     @reviews = Review.all.where(product_id: params[:product_id])
@@ -10,20 +11,22 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    if session[:merchant_id] == @merchant.id && @product.merchant_id == @mechant.id
-      render :review_error
+    if !@merchant.nil?
+      if session[:merchant_id] == @merchant.id && @product.merchant_id == @mechant.id
+        render :review_error
+      end
     end
 
     @review = Review.new
   end
 
   def create
-    if Review.create!(review_params)
-      if params[:product_id]
-        redirect_to product_reviews_path(params[:product_id])
-      elsif params[:merchant_id]
-        redirect_to merchant_product_reviews_path(params[:merchant_id])
-      end
+    Review.create!(review_params)
+
+    if params[:product_id] && !params[:merchant_id]
+      redirect_to product_reviews_path(params[:product_id])
+    elsif params[:merchant_id] && params[:product_id]
+      redirect_to merchant_product_reviews_path(params[:merchant_id], params[:product_id])
     else
       render :new
     end

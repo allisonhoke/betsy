@@ -14,6 +14,12 @@ class ReviewsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:reviews)
   end
 
+  test "Index should return one or more reviews" do
+    get :index, product_id: @product.id
+
+    assert_not_nil assigns(:reviews)
+  end
+
   test "Index should have an @product @merchant set" do
     get :index, product_id: @product.id, merchant_id: @merchant.id
 
@@ -35,23 +41,48 @@ class ReviewsControllerTest < ActionController::TestCase
     assert_template :new
   end
 
-  #### Test later ####
-  # test "New should render the review error page for a merchant trying to review his/her own product" do
-  #   get :new, product_id: @product.id, merchant_id: @merchant.id
-  #   assert_equal @product.merchant_id,0
-  #   assert_template :review_error
-  # end
+  ### Test later ####
+  test "New should create a new review if not logged in" do
+    session[:merchant_id] = nil
+    get :new, product_id: @product.id, merchant_id: @merchant.id
+
+    assert_not_nil assigns(:review)
+    assert_template :new
+  end
+
+  test "New should not let a merchant review their own product" do
+    get :new, product_id: @product.id, merchant_id: @merchant.id
+    session[:merchant_id] = @merchant.id
+
+    assert_not assigns(:review).valid?
+  end
 
   test "Create should create review for unauth user" do
+    session[:merchant_id] = nil
+
     assert_difference('Review.count') do
       post :create, review: { rating: 4, rating_description: "bah", product_id: 1 } , product_id: 1
     end
   end
 
   test "Create should create review for an auth user" do
+    session[:merchant_id] = 983248743734
+
     assert_difference('Review.count') do
-      post :create, review: { rating: 4, rating_description: "bah", product_id: 1 } , product_id: 1, merchant_id: merchants(:other_merchant).id
+      post :create, review: { rating: 4, rating_description: "bah", product_id: 1 }, product_id: 1
     end
+  end
+
+  test "If on the merchants/product route, creating a new review should send you towards the route merchants/products/review" do
+    post :create, review: { rating: 1, rating_description: "slkdfj", product_id: 1}, product_id: @product.id, merchant_id: @merchant.id
+
+    assert_redirected_to merchant_product_reviews_path(@merchant, @product)
+  end
+
+  test "A review without a rating should raise a parameter missing error" do
+    session[:merchant_id] = @merchant.id
+
+    assert_raises(ActionController::ParameterMissing) { post :create, {rating: nil, rating_description: "slkdfj", product_id: 1}}
   end
 
   test "Show should show review" do

@@ -14,11 +14,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    if Category.create!(category_params)
+    Category.create!(category_params)
       redirect_to categories_path
-    else
-      render :new
-    end
   end
 
 private

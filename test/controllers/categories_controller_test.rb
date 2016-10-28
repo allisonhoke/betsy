@@ -2,8 +2,9 @@ require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
   setup do
-    @category = categories(:correct_category)
+    @merchant = merchants(:teeny_merchant)
     @product = products(:chair)
+    @category = categories(:correct_category)
     @product.categories << @category
   end
 
@@ -18,18 +19,28 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:categories)
   end
 
-  test "New should get new" do
+  test "Only a logged on person can get to the new category form" do
+    session[:merchant_id] = @merchant.id
     get :new
     assert_response :success
     assert_template :new
   end
 
-  ### FINISH LATER ###
-  # test "Only a logged on merchant can create a new category" do
-  #
-  # end
+  test "A non-logged on person cannot get to the new form" do
+    session[:merchant_id] = nil
+    get :new
+    assert_template :view_error
+  end
+
+  test "A category without a name will raise a parameter missing error" do
+    session[:merchant_id] = @merchant.id
+
+    assert_raises(ActionController::ParameterMissing) { post :create, {name: nil, description: "slkdfj"}}
+  end
 
   test "Create should create category" do
+    session[:merchant_id] = @merchant.id
+
     assert_difference('Category.count') do
       post :create, category: { name: "name", description: "q, d, t" }
     end
