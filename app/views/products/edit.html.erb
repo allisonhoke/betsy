@@ -1,6 +1,6 @@
 <h1>Edit This Product</h1>
 
-<%= form_for @product, :url => {method: :patch} do |f| %>
+<%= form_for @product, url: merchant_product_path(@product.merchant, @product), method: :patch do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
