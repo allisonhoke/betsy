@@ -17,7 +17,14 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "products without a price are not valid" do
-    product = products(:dog)
+    product = Product.new()
+    product.name = "Invalid Product"
+    product.price = nil
+    product.description = "This should not work"
+    product.photo_url = 'notreal.jpg'
+    product.stock = 3
+    product.merchant_id = 1
+    product.save
     assert_not product.valid?
   end
 
