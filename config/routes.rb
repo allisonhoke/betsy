@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "orders/edit" => "orders#edit"
   patch "orders/update" => "orders#update"
   get "orders/confirmation" => "orders#purchase", as: "confirmation"
-  patch "orders/ship" => "orders#mark_as_shipped", as: "ship"
+  patch "orders/ship" => "orders#ship", as: "ship"
 
   resources :products, only: [:index, :show] do
     resources :order_items, only: [:create]
