@@ -44,7 +44,7 @@ products = [
 
   {name: "Li'l Banana", price: 200, description: "Imagine the pajamas for this banana!!", photo_url: "/assets/banana.jpg", stock: 9, merchant_id: 5},
 
-  {name: "Unsexy Twister", price: 1550, description: "Not nearly as difficult as the original", photo_url: "/assets/twitter.jpg", stock: 8, merchant_id: 4}
+  {name: "Unsexy Twister", price: 1550, description: "Not nearly as difficult as the original", photo_url: "/assets/twister.jpg", stock: 8, merchant_id: 4}
 ]
 
 reviews = [
