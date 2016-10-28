@@ -5,6 +5,18 @@ class Merchant < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :uid, :provider, presence: true
 
+  def add_decimal(cents)
+    pfx = [ '0.00', '0.0', '0.' ]
+    if(pfx[cents.to_s.length])
+      cents = pfx[cents.to_s.length] + cents.to_s
+    else
+      cents = cents.to_s.dup
+      cents[-2, 0] = '.'
+    end
+    return cents
+  end
+
+
   def self.build_from_github(auth_hash)
     merchant       = Merchant.new
     merchant.uid   = auth_hash[:uid]
@@ -40,6 +52,10 @@ class Merchant < ActiveRecord::Base
         end
       end
     end
+
+    if !sum.nil?
+      sum = "$" + add_decimal(sum)
+    end
     return sum
   end
 
@@ -70,6 +86,18 @@ class Merchant < ActiveRecord::Base
     pending_revenue = pending_subtotals.reduce(:+)
     paid_revenue = paid_subtotals.reduce(:+)
     complete_revenue = complete_subtotals.reduce(:+)
+
+    if !pending_revenue.nil?
+      pending_revenue = "$" + add_decimal(pending_revenue)
+    end
+
+    if !paid_revenue.nil?
+      paid_subtotals_revenue = "$" + add_decimal(paid_revenue)
+    end
+
+    if !complete_revenue.nil?
+      complete_revenue = "$" + add_decimal(complete_revenue)
+    end
 
     return pending_revenue, paid_revenue, complete_revenue
   end
@@ -118,5 +146,32 @@ class Merchant < ActiveRecord::Base
       end
     end
     return orders
+  end
+
+  def find_order_items_from_orders
+    if products.nil?
+      return nil
+    end
+
+    product_name = []
+    quantity = []
+    subtotal = []
+
+    products.each do |product|
+      order_items = OrderItem.where(product_id: product.id)
+      order_items.each do |item|
+        product_name.push(Product.find_by(id: product.id).name)
+        quantity.push(item.quantity)
+        subtotal.push(Product.find_by(id: product.id).price * item.quantity)
+      end
+    end
+
+    if !subtotal.nil?
+      subtotal.each do |monies|
+        subtotal.push("$" + add_decimal(monies))
+        subtotal.shift
+      end
+    end
+    return product_name, quantity, subtotal
   end
 end
