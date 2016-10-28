@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
     product = Product.find(params[:product_id])
 
     counter = 0
-    if product.stock >= order_item_params(params)[:quantity].to_i
+    if product.stock != nil && product.stock >= order_item_params(params)[:quantity].to_i
       @cart.order_items.each do |item|
         if item.product_id == product.id
           item.quantity += order_item_params(params)[:quantity].to_i
@@ -21,7 +21,7 @@ class OrderItemsController < ApplicationController
     end
 
     if counter == 0
-      if product.stock >= order_item_params(params)[:quantity].to_i
+      if product.stock != nil && product.stock >= order_item_params(params)[:quantity].to_i
         @order_item = OrderItem.new
         @order_item.product_id = product.id
         @order_item.order_id = @cart.id
