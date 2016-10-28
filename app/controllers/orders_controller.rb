@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     @cart.expiration_date = order_params(params)[:expiration_date]
     @cart.zip_code = order_params(params)[:zip_code]
     if @cart.save
-      redirect_to confirmation_path#(@cart)
+      redirect_to confirmation_path
     else
       render :edit
     end
@@ -59,7 +59,16 @@ class OrdersController < ApplicationController
 
     render :purchase # REVIEW: does this need to be here since I am clearing the session data after this?
 
-    session.delete(:order_id) # REVIEW: clear current cart
+    session.delete(:order_id)
+  end
+
+  def ship
+    set_order
+    if @cart.mark_as_shipped
+      redirect_to :merchant_path
+    else
+      render :not_shipped
+    end
   end
 
   private

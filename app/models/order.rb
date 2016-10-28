@@ -20,4 +20,9 @@ class Order < ActiveRecord::Base
     self.status = "paid"
     self.save
   end
+
+  def mark_as_shipped
+    self.status = "shipped"
+    self.save
+  end
 end
