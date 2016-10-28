@@ -1,6 +1,15 @@
-<h1>Add new product for this merchant</h1>
+<section>
+  <h2>Errors</h2>
+  <ul>
+    <% @product.errors.each do |field, problem| %>
+      <li><strong><%= field %></strong><%= problem %></li>
+    <% end %>
+  </ul>
+</section>
 
-<%= form_for @product, :url => {method: :post} do |f| %>
+<h1>Add A New Product</h1>
+
+<%= form_for @product, url:merchant_products_path(@merchant), method: :post, class: "form" do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 

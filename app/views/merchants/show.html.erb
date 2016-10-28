@@ -9,18 +9,23 @@
     <%# if session[:merchant_id] == @merchant.id %>
       <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
     <%# end %>
-    <p><img src= "<%= product.photo_url %>" ></p>
-    <p>Description: <%= product.description %></p>
-    <p>Price: $<%= add_decimal(product.price) %></p>
-    <p>Stock: <%= product.stock %></p>
+      <p><img src= "<%= product.photo_url %>" ></p>
+      <p>Description: <%= product.description %></p>
+      <p>Price: $<%= add_decimal(product.price) %></p>
+      <p>Stock: <%= product.stock %></p>
+      <p><%= link_to "Details", merchant_product_path(@merchant.id, product.id) %></p>
   <% end %>
 <% else %>
-<h2>My Products</h2>
-<p>No products yet<p>
+  <h2>My Products</h2>
+  <p>No products yet<p>
 <% end %>
 <%# if session[:merchant_id] == @merchant.id %>
-  <p><%= link_to("New Category", new_category_path, class: "button", method: :get) %></p>
-  <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
+
+
+<%# if session[:merchant_id] == @merchant.id %>
+    <p><%= link_to("New Category", new_category_path, class: "button", method: :get ) %></p>
+    <p><%= link_to("New Product", new_merchant_product_path(@merchant.id), class: "button", method: :get ) %></p>
+
   <h2>Order Fulfillment</h2>
 
   <h3>Total Revenue</h3>
