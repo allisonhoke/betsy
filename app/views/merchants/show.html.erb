@@ -1,8 +1,9 @@
+<!--  If I'd had more time to refactor much of this would have been moved to partials/view helper functionality. Much of this site was buitl in the last 2-3 days of the project, so ran out of time. (Was focusing efforts on test coverage.)-->
 <% unless @merchant.nil?  %>
   <h1><%= @merchant.username %></h1>
 <% end %>
 
-<h2>My Products</h2>
+<h2>Products</h2>
   <% if !@products.nil? %>
     <% @products.each do |product| %>
       <h3><%= product.name %></h3>
@@ -78,6 +79,7 @@
 
       <table id="merchantOrders">
         <tr class="header">
+          <th style="width:10%;">Order #</th>
           <th style="width:10%;">Name</th>
           <th style="width:10%;">Email</th>
           <th style="width:10%;">Status</th>
@@ -86,11 +88,11 @@
         </tr>
         <% @merchant_orders.each do |order| %>
           <tr>
+            <td> <%= order.id %> </td>
             <td> <%= link_to(order.name, merchant_orders_path(@merchant.id,order.id), method: :get) %> </td>
             <td> <%= order.email %> </td>
             <td> <%= order.status %> </td>
             <td> <%= order.updated_at.strftime("%A, %B %d, %Y") %> </td>
-            <td> </td>
           </tr>
         <% end %>
       </table>
@@ -107,6 +109,7 @@
             <td> <%= order.name %> </td>
         </tr>
         <tr class="header">
+          <th style="width:10%;">Order #</th>
           <th style="width:10%;">Product Name</th>
           <th style="width:10%;">Product Details</th>
           <th style="width:10%;">Quantity</th>
@@ -116,9 +119,10 @@
         <% end %>
         <tr>
           <td><%= @merchant_order_items[index][0] %></td>
-          <td><%= link_to("Link", product_path(@merchant_order_items[index][1])) %></td>
-          <td><%= @merchant_order_items[index][2] %></td>
+          <td><%= @merchant_order_items[index][1] %></td>
+          <td><%= link_to("Link", product_path(@merchant_order_items[index][2])) %></td>
           <td><%= @merchant_order_items[index][3] %></td>
+          <td><%= @merchant_order_items[index][4] %></td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <% index += 1 %>

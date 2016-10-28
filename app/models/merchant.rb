@@ -158,7 +158,7 @@ class Merchant < ActiveRecord::Base
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
       order_items.each do |item|
-        order_details.push([product.name, product.id, item.quantity, product.price * item.quantity])
+        order_details.push([item.id, product.name, product.id, item.quantity, product.price * item.quantity])
       end
     end
 
