@@ -17,6 +17,7 @@
 /***** BODY *****/
 body {
   background-color: #D5DED9;
+  cursor: url("/assets/small_fry.png");
 }
 
 /****** Header *****/
@@ -72,6 +73,26 @@ p, td {
 /*To keep our images semi-normal-sized all around*/
 img {
   height: 200px;
+}
+
+.smaller-fry {
+  height: 30px;
+}
+
+.small-fry {
+  height: 100px;
+  position: absolute;
+  margin-left: -.2em;
+  margin-top: -.6em;
+  opacity: 0;
+  transition: opacity .5s ease-out;
+    /*-moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}*/
+
+.small-fry:hover {
+  opacity: 1;
 }
 
 /***** YIELD *****/
