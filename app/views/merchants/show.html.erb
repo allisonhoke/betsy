@@ -35,42 +35,15 @@
     <% end %>
 
     <h3>Total Revenue (by order status)</h3>
-    <% if !@merchant_oi_revenue_by_status[0].nil? %>
-      <p>Pending: <%= @merchant_oi_revenue_by_status[0] %></p>
-    <% else %>
-    <p>Pending: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_revenue_by_status[1].nil? %>
-      <p>Paid: <%= @merchant_oi_revenue_by_status[1] %></p>
-    <% else %>
-      <p>Paid: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_revenue_by_status[2].nil? %>
-      <p>Complete: <%= @merchant_oi_revenue_by_status[2] %></p>
-    <% else %>
-      <p>Complete: N/A</p>
-    <% end %>
+    <p>Pending: <%= @merchant_oi_revenue_by_status[0] %></p>
+    <p>Paid: <%= @merchant_oi_revenue_by_status[1] %></p>
+    <p>Complete: <%= @merchant_oi_revenue_by_status[2] %></p>
 
     <h3>Number of Orders (by order status)</h3>
-    <% if !@merchant_oi_count_by_status[0].nil? %>
-      <p>Pending: <%= @merchant_oi_count_by_status[0] %></p>
-    <% else %>
-      <p>Pending: N/A</p>
-    <% end %>
+    <p>Pending: <%= @merchant_oi_count_by_status[0] %></p>
+    <p>Paid: <%= @merchant_oi_count_by_status[1] %></p>
+    <p>Complete: <%= @merchant_oi_count_by_status[2] %></p>
 
-    <% if !@merchant_oi_count_by_status[1].nil? %>
-      <p>Paid: <%= @merchant_oi_count_by_status[1] %></p>
-    <% else %>
-      <p>Paid: N/A</p>
-    <% end %>
-
-    <% if !@merchant_oi_count_by_status[2].nil? %>
-      <p>Complete: <%= @merchant_oi_count_by_status[2] %></p>
-    <% else %>
-      <p>Complete: N/A</p>
-    <% end %>
 
     <h3>Orders</h3>
     <% if !@merchant_orders.nil? || @merchant_orders.count == 0 %>

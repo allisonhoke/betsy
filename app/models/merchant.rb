@@ -50,6 +50,10 @@ class Merchant < ActiveRecord::Base
         elsif Order.find(item.order_id).status == 'complete'
           sum += item.quantity * product.price
         end
+
+      elsif Order.find(item.order_id).status == 'shipped'
+          sum += item.quantity * product.price
+        end
       end
     end
 
@@ -67,6 +71,7 @@ class Merchant < ActiveRecord::Base
     pending_subtotals = []
     paid_subtotals = []
     complete_subtotals = []
+    shipped_subtotals = []
 
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
@@ -79,6 +84,9 @@ class Merchant < ActiveRecord::Base
 
         elsif Order.find(item.order_id).status == 'complete'
           complete_subtotals.push(item.quantity * product.price)
+
+        elsif Order.find(item.order_id).status == 'shipped'
+          shipped_subtotals.push(item.quantity * product.price)
         end
       end
     end
@@ -86,6 +94,7 @@ class Merchant < ActiveRecord::Base
     pending_revenue = pending_subtotals.reduce(:+)
     paid_revenue = paid_subtotals.reduce(:+)
     complete_revenue = complete_subtotals.reduce(:+)
+    shipped_revenue = shipped_subtotals.reduce(:+)
 
     if !pending_revenue.nil?
       pending_revenue = "$" + add_decimal(pending_revenue)
@@ -99,18 +108,23 @@ class Merchant < ActiveRecord::Base
       complete_revenue = "$" + add_decimal(complete_revenue)
     end
 
-    return pending_revenue, paid_revenue, complete_revenue
+    if !shipped_revenue.nil?
+      complete_revenue = "$" + add_decimal(shipped_revenue)
+    end
+
+    return pending_revenue, paid_revenue, complete_revenue, shipped_revenue
   end
 
   def find_total_number_of_orders_by_status
     if products.nil?
-      return nil, nil, nil, nil
+      return nil, nil, nil, nil, nil
     end
 
     pending = 0
     paid = 0
     complete = 0
     cancelled = 0
+    shipped = 0
 
     products.each do |product|
       order_items = OrderItem.where(product_id: product.id)
@@ -126,10 +140,13 @@ class Merchant < ActiveRecord::Base
 
         elsif Order.find(item.order_id).status == 'cancelled'
           cancelled += 1
+
+        elsif Order.find(item.order_id).status == 'shipped'
+          shipped += 1
         end
       end
     end
-    return pending, paid, complete, cancelled
+    return pending, paid, complete, cancelled, shipped
   end
 
   def find_orders
