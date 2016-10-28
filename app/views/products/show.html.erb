@@ -3,7 +3,7 @@
 <h4><%= @product.name %></h4>
 <p><%= image_tag("#{@product.photo_url}") %></p>
 <p><%= @product.description %></p>
-<p>Price: $<%= "#{add_decimal(@product.price)}" %>.00</p>
+<p>Price: $<%= "#{add_decimal(@product.price)}" %></p>
 <p>Sold by:<%= " #{Merchant.find(@product.merchant_id).username}" %></p>
 
 
