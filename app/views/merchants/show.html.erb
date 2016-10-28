@@ -19,7 +19,7 @@
     <h2>My Products</h2>
     <p>No products yet<p>
   <% end %>
-  
+
   <%# if session[:merchant_id] == @merchant.id %>
     <p><%= link_to("New Category", new_category_path, class: "button", method: :get) %></p>
     <p><%= link_to("New Product", new_merchant_product_path(:merchant_id), class: "button", method: :get ) %></p>
@@ -108,16 +108,17 @@
         </tr>
         <tr class="header">
           <th style="width:10%;">Product Name</th>
+          <th style="width:10%;">Product Details</th>
           <th style="width:10%;">Quantity</th>
           <th style="width:10%;">Subtotal</th>
-          <th style="width:10%;">&nbsp;</th>
           <th style="width:10%;">&nbsp;</th>
         </tr>
         <% end %>
         <tr>
           <td><%= @merchant_order_items[index][0] %></td>
-          <td><%= @merchant_order_items[index][1] %></td>
+          <td><%= link_to("Link", product_path(@merchant_order_items[index][1])) %></td>
           <td><%= @merchant_order_items[index][2] %></td>
+          <td><%= @merchant_order_items[index][3] %></td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <% index += 1 %>

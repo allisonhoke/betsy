@@ -26,8 +26,6 @@ class MerchantsController < ApplicationController
 
     @merchant_order_items = @merchant.find_order_items_from_orders
 
-    @merchant_order_items_flattened = @merchant.find_order_items_from_orders.shift(3)
-
     @merchant_order_ids = @merchant.find_order_ids_from_order_items
 
   end
