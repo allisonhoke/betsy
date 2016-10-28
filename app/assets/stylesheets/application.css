@@ -18,6 +18,7 @@
 body {
   background-color: #D5DED9;
   cursor: url("/assets/small_fry.png");
+  min-height:100%;
 }
 
 /****** Header *****/
@@ -55,6 +56,7 @@ nav {
 /*This is the nav bar links*/
 header li {
   font-size: 2em;
+  padding: .5em;
 }
 
 /***** FONTS *****/
@@ -140,9 +142,10 @@ table tr td:first-of-type {
 /***** FOOTER *****/
 footer {
   /*position: absolute;*/
-  right: 0;
+  height: 5em;
+  /*right: 0;*/
   bottom: 0;
-  left: 0;
+  width: 100%;
   padding: 1rem;
   background-color: #99B2B7;
 }

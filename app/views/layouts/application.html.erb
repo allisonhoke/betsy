@@ -13,17 +13,15 @@
     <h3 class="motto">It's the <img src="/assets/small_fry.png" alt="tiny ketchup bottle" class="small-fry" /><small class="motto-emphasize">little</small> things</h3>
 
     <nav class="row">
-
-      <ul class="menu large-6 small-12 columns">
+      <ul class="menu large-6 small-12 columns ">
         <li><%= link_to("Shop All", products_path) %></li>
         <li><%= link_to("Shop Merchants", merchants_path) %></li>
-        <li><%= "#{    }" %></li>
         <% Category.all.each do |category| %>
-        <li><%= link_to(category.name, category_products_path(category.id)) %></li>
+        <li><small><%= link_to(category.name, category_products_path(category.id)) %></small></li>
         <% end %>
       </ul>
-      <div class="large-1 columns"></div>
-      <ul class="menu large-5 small-12 columns text-right">
+      <div class="large-3 columns"></div>
+      <ul class="menu large-3 small-12 columns text-right">
         <% if session[:merchant_id].nil? %>
         <li><%= link_to("Sign In", "/auth/github", method: :get) %></li>
         <% else %>
