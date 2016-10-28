@@ -3,18 +3,13 @@
 <h1>PRODUCTS</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @products.each do |p| %>
       <tr>
         <td><%= link_to"#{p.name}", product_path(p.id) %></td>
         <td>Price: $<%= "#{add_decimal(p.price)}" %></td>
-        <td><%= image_tag("#{p.photo_url}") %> </td>
+        <td><%= link_to image_tag(p.photo_url), product_path(p.id) %> </td>
       </tr>
     <% end %>
   </tbody>

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   patch "products/:id/add_to_cart" => "products#add_to_cart"
 
 
-  resources :merchants, only: [:show] do
+  resources :merchants, only: [:show,:index] do
     get 'orders/:id' => 'orders#merchant_view', as: 'orders'
     resources :products, except: [:delete] do
       resources :reviews, only: [:show, :new, :create,:index]

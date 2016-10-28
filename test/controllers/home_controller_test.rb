@@ -8,14 +8,16 @@ class HomeControllerTest < ActionController::TestCase
     assert_template :index
   end
 
-    test "(index) should have the products with 5 star ratings" do
-    Product.create(id: 1, name: "Tiny Tater Tots")
-    Review.create(id: 1, rating: 5, product_id: 1)
-    Review.create(id: 2, rating: 4, product_id: 1)
-    Review.create(id: 3, rating: 5, product_id: 1)
+  test "If there are no 5 star products, @popular should be empty" do
+    get :index
 
-    five_star_reviews = Review.where(rating: 5)
+    assert_empty assigns(:popular)
+  end
 
-    assert five_star_reviews.count == 2
+  test "A five star review should increase the count of @popular by one" do
+    Review.create(rating: 5, rating_description: "asdf", product_id: products(:cat).id)
+
+    get :index
+    assert_equal assigns(:popular).count, 1
   end
 end
