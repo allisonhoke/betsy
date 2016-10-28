@@ -25,4 +25,9 @@ class OrderTest < ActiveSupport::TestCase
     @order.mark_as_paid
     assert_equal @order.status, "paid"
   end
+
+  test "#mark as shipped changes the order status to 'shipped'" do
+    @order.mark_as_shipped
+    assert_equal @order.status, "shipped"
+  end
 end

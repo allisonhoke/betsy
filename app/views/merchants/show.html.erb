@@ -93,6 +93,7 @@
             <td> <%= order.email %> </td>
             <td> <%= order.status %> </td>
             <td> <%= order.updated_at.strftime("%A, %B %d, %Y") %> </td>
+            <td> <%= link_to("Link", ship_path, method: :patch) %> </td>
           </tr>
         <% end %>
       </table>
