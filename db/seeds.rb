@@ -38,7 +38,13 @@ products = [
 
   {name: "Miniature Starbucks", price: 300, description: "Only 300 calories!!", photo_url: "/assets/starbucks.jpg", stock: 22, merchant_id: 9},
 
-  {name: "MicroSquid", price: 1900, description: "Booger or creature?", photo_url: "/assets/squid.jpg", stock: 4, merchant_id: 10}
+  {name: "MicroSquid", price: 1900, description: "Booger or creature?", photo_url: "/assets/squid.jpg", stock: 4, merchant_id: 10},
+
+  {name: "Colored Pencils", price: 1000, description: "Cutesy wittle pencils awwww", photo_url: "/assets/colored_pencils.jpg", stock: 9, merchant_id: 1},
+
+  {name: "Li'l Banana", price: 200, description: "Imagine the pajamas for this banana!!", photo_url: "/assets/banana.jpg", stock: 9, merchant_id: 5},
+
+  {name: "Unsexy Twister", price: 1550, description: "Not nearly as difficult as the original", photo_url: "/assets/twitter.jpg", stock: 8, merchant_id: 4}
 ]
 
 reviews = [
@@ -123,6 +129,7 @@ Category.all.each do |category|
     Product.find(13).categories << category
     Product.find(12).categories << category
     Product.find(11).categories << category
+    Product.find(16).categories << category
   elsif category.id == 4
     Product.find(2).categories << category
     Product.find(3).categories << category
