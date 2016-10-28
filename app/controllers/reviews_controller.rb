@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    if @merchant
+    if !@merchant.nil?
       if session[:merchant_id] == @merchant.id && @product.merchant_id == @mechant.id
         render :review_error
       end
@@ -21,12 +21,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if Review.create!(review_params)
-      if params[:product_id]
-        redirect_to product_reviews_path(params[:product_id])
-      elsif params[:merchant_id]
-        redirect_to merchant_product_reviews_path(params[:merchant_id])
-      end
+    Review.create!(review_params)
+
+    if params[:product_id] && !params[:merchant_id]
+      redirect_to product_reviews_path(params[:product_id])
+    elsif params[:merchant_id] && params[:product_id]
+      redirect_to merchant_product_reviews_path(params[:merchant_id], params[:product_id])
     else
       render :new
     end
