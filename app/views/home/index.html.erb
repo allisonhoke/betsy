@@ -7,9 +7,11 @@
   <br>
 
   <% @popular.each do |product| %>
-    <h4><%= link_to product.name, product_path(product) %></h4>
-    <p><%= link_to image_tag(product.photo_url), product_path(product) %></p>
-    <p>Stock: <%= product.stock %></p>
-    <hr>
+    <% if product.stock > 0 %>
+      <h4><%= link_to product.name, product_path(product) %></h4>
+      <p><%= link_to image_tag(product.photo_url), product_path(product) %></p>
+      <p>Stock: <%= product.stock %></p>
+      <hr>
+    <% end %>
   <% end %>
 <% end %>
