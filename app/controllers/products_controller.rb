@@ -36,12 +36,16 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product
+    if !@merchant.nil?
+      if session[:merchant_id] != @product.merchant_id
+        render :edit_error
+      end
+    end
   end
 
   def update
     if @product.update(product_params)
-      redirect_to merchant_path
+      redirect_to product_path(@product)
     else
       render :edit
     end
