@@ -13,6 +13,7 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should get the new form for a new product for that merchant" do
+    session[:merchant_id] = @merchant.id
     get :new, merchant_id: @merchant.id
     assert_response :success
     assert_template :new
@@ -29,26 +30,17 @@ class ProductsControllerTest < ActionController::TestCase
     assert_equal assigns(:product), products(:cat)
   end
 
-  test "should get edit form" do
-    id = products(:narwal).id
-    get :edit, {id: id}
+  test "should get edit form for that product for its merchant" do
+    session[:merchant_id] = @merchant.id
+    get :edit, id: @product.id, merchant_id: @merchant.id
     assert_response :success
     assert_template :edit
   end
 
   test "should update product" do
-    id = products(:cat).id
-    patch :update, {id: id, product: {name: "Updated Cat"} }
-     assert_equal "Updated Cat", Product.find(id).name
-     assert_redirected_to product_path
+    session[:merchant_id] = @merchant.id
+    patch :update, :merchant_id => session[:merchant_id], id: @product, product: {stock: 4}
+     assert_redirected_to product_path(@product)
   end
 
-  test "destroy should delete the product" do
-    id = products(:narwal).id
-    assert_difference("Product.count", -1) do
-      delete :destroy, {id: id}
-    end
-
-    assert_redirected_to merchant_path
-  end
 end
