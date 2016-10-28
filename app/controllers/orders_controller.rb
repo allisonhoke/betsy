@@ -63,9 +63,9 @@ class OrdersController < ApplicationController
   end
 
   def ship
-    set_order
-    if @cart.mark_as_shipped
-      redirect_to :merchant_path
+    @order = Order.find(session[:ship_order_id])
+    if @order.mark_as_shipped
+      redirect_to merchant_path(session[:merchant_id])
     else
       render :not_shipped
     end

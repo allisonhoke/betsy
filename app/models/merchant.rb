@@ -161,32 +161,6 @@ class Merchant < ActiveRecord::Base
         order_details.push([item.id, product.name, product.id, item.quantity, product.price * item.quantity])
       end
     end
-
-    # if !order_details.nil?
-    #   order_details.each_with_index.map do |order, index|
-    #     if order[index] % 3 == 0
-    #       order_details[order][index] = "$" + add_decimal(order_details[order][index])
-    #     end
-    #   end
       return order_details
-    # end
   end
-
-    def find_order_ids_from_order_items
-      if products.nil?
-        return nil
-      end
-
-      order_ids = []
-
-      products.each do |product|
-        order_items = OrderItem.where(product_id: product.id)
-
-        order_items.each do |item|
-          order_ids.push(item.order_id)
-        end
-      end
-      puts order_ids
-      return order_ids
-    end
 end
