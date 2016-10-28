@@ -7,9 +7,9 @@
   <% if !@products.nil? %>
     <% @products.each do |product| %>
       <h3><%= product.name %></h3>
-        <%# if session[:merchant_id] == @merchant.id %>
+        <% if session[:merchant_id] == @merchant.id %>
           <p><%= link_to("Edit Product", edit_merchant_product_path(@merchant.id, product.id), class: "button", method: :get)%></p>
-        <%# end %>
+        <% end %>
         <p><img src= "<%= product.photo_url %>" ></p>
         <p>Description: <%= product.description %></p>
         <p>Price: $<%= add_decimal(product.price) %></p>
@@ -21,7 +21,7 @@
     <p>No products yet<p>
   <% end %>
 
-  <%# if session[:merchant_id] == @merchant.id %>
+  <% if session[:merchant_id] == @merchant.id %>
     <p><%= link_to("New Category", new_category_path, class: "button", method: :get) %></p>
     <p><%= link_to("New Product", new_merchant_product_path(@merchant.id), class: "button", method: :get ) %></p>
 
@@ -138,4 +138,4 @@
     <% else %>
       <p>No orders</p>
     <% end %>
-  <%# end %>
+  <% end %>
